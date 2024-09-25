@@ -2,6 +2,7 @@ package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities;
 
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -24,7 +25,7 @@ public class Vehicle implements Serializable {
     private Long id;
     @Column(name = "registered", nullable = false)
     private Boolean registered;
-    @Column(name = "plate", nullable = false, length = 9)
+    @Column(name = "plate", nullable = false, length = 9, unique = true)
     private String plate;
     @Column(name = "category", nullable = false, length = 20)
     private Category category;
@@ -43,5 +44,6 @@ public class Vehicle implements Serializable {
     private Vacancy vacancy;
 
     @OneToOne(mappedBy = "vehicle")
+    @JsonIgnore
     private Ticket ticket;
 }
