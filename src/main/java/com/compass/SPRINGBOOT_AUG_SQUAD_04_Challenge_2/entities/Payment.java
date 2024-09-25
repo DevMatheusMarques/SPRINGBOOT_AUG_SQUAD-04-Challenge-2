@@ -17,6 +17,6 @@ public class Payment {
         double valueForTime = minutesParked * MINUTE_VALUE;
         double value = valueForTime + MINIMUM_VALUE;
 
-        return this.ticket.getVehicle().getType().equals(TypeVehicle.PASSENGER_CAR) ? value * 2 : value;
+        return this.ticket.getVehicle().getTypeVehicle().equals(TypeVehicle.PASSENGER_CAR) ? value * 2 : value;
     }
 }

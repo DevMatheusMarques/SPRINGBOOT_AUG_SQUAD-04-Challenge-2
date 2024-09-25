@@ -16,8 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TicketService {
 
-    @Autowired
-    TicketRepository ticketRepository;
+    private final TicketRepository ticketRepository;
 
     @Transactional
     public Ticket saveTicket(Ticket ticket) {

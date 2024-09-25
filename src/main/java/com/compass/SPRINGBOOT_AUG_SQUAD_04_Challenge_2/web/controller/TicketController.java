@@ -19,11 +19,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TicketController {
 
-    @Autowired
-    private TicketService ticketService;
+    private final TicketService ticketService;
 
-    @Autowired
-    private VehicleService vehicleService;
+    private final VehicleService vehicleService;
 
     @PostMapping
     public ResponseEntity<Ticket> create(@RequestBody Ticket ticket) {
