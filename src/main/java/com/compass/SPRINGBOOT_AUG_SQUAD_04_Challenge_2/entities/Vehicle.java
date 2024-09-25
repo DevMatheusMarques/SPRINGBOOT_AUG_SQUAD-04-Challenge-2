@@ -1,6 +1,7 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities;
 
-import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.TypeVehicle;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.*;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,12 +22,14 @@ public class Vehicle implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "registered", nullable = false)
+    private Boolean registered;
     @Column(name = "plate", nullable = false, length = 9)
     private String plate;
-    @Column(name = "type", nullable = false, length = 20)
-    private TypeVehicle type;
-    @Column(name = "monthly", nullable = false)
-    private Boolean monthly;
+    @Column(name = "category", nullable = false, length = 20)
+    private Category category;
+    @Column(name = "type_vehicle", nullable = false, length = 20)
+    private TypeVehicle typeVehicle;
 
     @CreatedDate
     @Column(name = "date_created")
