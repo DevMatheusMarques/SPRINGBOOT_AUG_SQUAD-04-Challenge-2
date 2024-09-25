@@ -1,5 +1,6 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities;
 
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.TypeVehicle;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
