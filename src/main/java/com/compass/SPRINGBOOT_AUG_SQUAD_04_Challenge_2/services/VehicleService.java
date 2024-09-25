@@ -17,7 +17,7 @@ public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Vehicle saveVehicle(Vehicle vehicle) {
         try {
             return vehicleRepository.save(vehicle);
@@ -53,7 +53,7 @@ public class VehicleService {
         }
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public Vehicle updateVehicle(Vehicle vehicle) {
         try {
             return vehicleRepository.save(vehicle);
@@ -62,7 +62,7 @@ public class VehicleService {
         }
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void deleteVehicle(Long id) {
         try {
             vehicleRepository.deleteById(id);

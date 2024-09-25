@@ -23,7 +23,7 @@ public class Vehicle implements Serializable {
     @Column(name = "plate", nullable = false, length = 9)
     private String plate;
     @Column(name = "type", nullable = false, length = 20)
-    private String type;
+    private TypeVehicle type;
     @Column(name = "monthly", nullable = false)
     private Boolean monthly;
 
