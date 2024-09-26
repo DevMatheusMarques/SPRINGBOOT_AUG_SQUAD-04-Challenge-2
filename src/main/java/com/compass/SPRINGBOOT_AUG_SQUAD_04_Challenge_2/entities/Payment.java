@@ -4,6 +4,7 @@ import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.TypeVehicle;
 import lombok.AllArgsConstructor;
 
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 
 @AllArgsConstructor
 public class Payment {
@@ -13,7 +14,7 @@ public class Payment {
     private Ticket ticket;
 
     public Double calculateValue() {
-        long minutesParked = Duration.between(this.ticket.getDateTimeEntry(), this.ticket.getDateTimeExit()).toMinutes();
+        long minutesParked = ChronoUnit.MINUTES.between(this.ticket.getDateTimeEntry(), this.ticket.getDateTimeExit());
         double valueForTime = minutesParked * MINUTE_VALUE;
         double value = valueForTime + MINIMUM_VALUE;
 
