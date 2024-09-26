@@ -53,7 +53,7 @@ public class TicketService {
 
     @Transactional
     public void deleteTicket(Long id) {
-        Ticket ticket = ticketRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Ticket not found"));
+        Ticket ticket = findTicketById(id);
         ticketRepository.deleteById(ticket.getId());
     }
 }
