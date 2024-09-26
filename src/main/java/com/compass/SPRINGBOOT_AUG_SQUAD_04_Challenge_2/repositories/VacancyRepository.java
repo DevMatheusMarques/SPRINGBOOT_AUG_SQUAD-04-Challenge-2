@@ -9,5 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface VacancyRepository extends JpaRepository<Vacancy, Long> {
-    Optional<Vacancy> findByType(TypeVehicle type); // Utilize o enum TypeVehicle
 }

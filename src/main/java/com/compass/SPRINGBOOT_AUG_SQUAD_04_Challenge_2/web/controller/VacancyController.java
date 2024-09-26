@@ -1,5 +1,5 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.controller;
-import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.TypeVehicle;
+
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vacancy;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +14,9 @@ public class VacancyController {
     @Autowired
     private VacancyService vacancyService;
 
-    @GetMapping("/type/{type}")
-    public Map<String, Double> getVacancyStatusByType(@PathVariable TypeVehicle type) {
-        return vacancyService.getVacancyStatusByType(type);
+    @GetMapping("/{id}")
+    public Vacancy getVacancyById(@PathVariable Long id) {
+        return vacancyService.getVacancyById(id);
     }
 
     @PatchMapping("/{id}")
