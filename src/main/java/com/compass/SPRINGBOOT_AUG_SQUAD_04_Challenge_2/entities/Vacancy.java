@@ -21,14 +21,14 @@ public class Vacancy {
     private Boolean status;
 
     @Column(name = "separated_occupied", nullable = false)
-    private Double separated_ocuppied;
+    private Integer separated_ocuppied;
 
     @Column(name = "separated_capacity", nullable = false)
-    private Double separated_capacity;
+    private Integer separated_capacity;
 
     @Column(name = "monthly_occupied", nullable = false)
-    private Double monthly_occupied;
+    private Integer monthly_occupied;
 
     @Column(name = "monthly_capacity", nullable = false)
-    private Double monthly_capacity;
+    private Integer monthly_capacity;
 }
