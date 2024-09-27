@@ -18,7 +18,7 @@ public class VacancyService {
         return vacancyRepository.findAll();
     }
 
-    public Vacancy updateVacancyCapacity(Long id, Double newSeparatedCapacity, Double newMonthlyCapacity) {
+    public Vacancy updateVacancyCapacity(Long id, Integer newSeparatedCapacity, Integer newMonthlyCapacity) {
         Optional<Vacancy> vacancyOptional = vacancyRepository.findById(id);
         if (vacancyOptional.isPresent()) {
             Vacancy vacancy = vacancyOptional.get();
