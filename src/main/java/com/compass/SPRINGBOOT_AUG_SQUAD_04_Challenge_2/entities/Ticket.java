@@ -1,7 +1,5 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +19,8 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @Column(nullable = false)
+    private Boolean parked;
     @Column(name = "datetime_entry", nullable = false)
     private LocalDateTime dateTimeEntry;
     @Column(name = "datetime_exit")
@@ -32,7 +32,7 @@ public class Ticket implements Serializable {
     @Column(name = "final_price")
     private Double finalPrice;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "vehicle_plate", referencedColumnName = "plate", nullable = false)
     private Vehicle vehicle;
 
