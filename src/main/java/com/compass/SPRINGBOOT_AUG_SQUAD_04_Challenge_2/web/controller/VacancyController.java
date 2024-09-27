@@ -33,9 +33,9 @@ public class VacancyController {
     }
     @PatchMapping("/{id}")
     public Vacancy updateVacancyCapacity(@PathVariable Long id,
-                                         @RequestBody Map<String, Double> capacities) {
-        Double newSeparatedCapacity = capacities.get("capacidade_avulsas");
-        Double newMonthlyCapacity = capacities.get("capacidade_mensalistas");
+                                         @RequestBody Map<String, Integer> capacities) {
+        Integer newSeparatedCapacity = capacities.get("capacidade_avulsas");
+        Integer newMonthlyCapacity = capacities.get("capacidade_mensalistas");
         return vacancyService.updateVacancyCapacity(id, newSeparatedCapacity, newMonthlyCapacity);
     }
 }
