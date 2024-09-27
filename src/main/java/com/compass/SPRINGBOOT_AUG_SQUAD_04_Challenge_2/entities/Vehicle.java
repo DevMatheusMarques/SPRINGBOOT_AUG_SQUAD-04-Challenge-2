@@ -1,7 +1,6 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities;
 
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -43,7 +43,7 @@ public class Vehicle implements Serializable {
     @JoinColumn(name = "vacany.id", referencedColumnName = "id")
     private Vacancy vacancy;
 
-    @OneToOne(mappedBy = "vehicle")
+    @OneToMany(mappedBy = "vehicle")
     @JsonIgnore
-    private Ticket ticket;
+    private List<Ticket> ticket;
 }
