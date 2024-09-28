@@ -23,10 +23,17 @@ public class TicketService {
     @Transactional
     public Ticket saveTicket(Ticket ticket) {
         String plate = ticket.getVehicle().getPlate();
-        Vehicle vehicle = vehicleService.findVehicleByPlate(plate);
+        TypeVehicle typeVehicle = ticket.getVehicle().getTypeVehicle();
+        Vehicle vehicle = vehicleService.findTicketVehicleByPlate(plate);
         Ticket activeTicket = findActiveTicketByVehiclePlate(plate);
+
         if (vehicle == null) {
-            throw new IllegalArgumentException("Vehicle not found with license plate: " + plate);
+            vehicle = new Vehicle();
+            vehicle.setCategory(Category.SINGLE);
+            vehicle.setTypeVehicle(typeVehicle);
+            vehicle.setPlate(ticket.getVehicle().getPlate());
+            vehicle.setRegistered(Boolean.FALSE);
+            vehicleService.saveVehicleTicket(vehicle);
         }
         if (activeTicket != null) {
             throw new IllegalStateException("This vehicle is already in the parking lot.");
