@@ -26,6 +26,11 @@ public class VehicleService {
         }
     }
 
+    @Transactional
+    public Vehicle saveVehicleTicket(Vehicle vehicle) {
+        return vehicleRepository.save(vehicle);
+    }
+
     @Transactional(readOnly = true)
     public List<Vehicle> findAllVehicles() {
         try {
@@ -51,6 +56,11 @@ public class VehicleService {
         } catch (EntityNotFoundException e) {
             throw new EntityNotFoundException("Vehicle not found");
         }
+    }
+
+    @Transactional(readOnly = true)
+    public Vehicle findTicketVehicleByPlate(String plate) {
+        return (Vehicle) vehicleRepository.findByPlate(plate).orElse(null);
     }
 
     @Transactional
