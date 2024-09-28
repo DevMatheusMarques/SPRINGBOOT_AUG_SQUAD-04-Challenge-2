@@ -22,7 +22,7 @@ public class VacancyController {
 
         List<Map<String, Object>> responseList = vacancies.stream().map(vacancy -> {
             Map<String, Object> response = new HashMap<>();
-            response.put("avulsas_ocupadas", vacancy.getSeparated_occupied());
+            response.put("avulsas_ocupadas", vacancy.getSeparated_ocuppied());
             response.put("capacidade_avulsas", vacancy.getSeparated_capacity());
             response.put("mensalistas_ocupadas", vacancy.getMonthly_occupied());
             response.put("capacidade_mensalistas", vacancy.getMonthly_capacity());

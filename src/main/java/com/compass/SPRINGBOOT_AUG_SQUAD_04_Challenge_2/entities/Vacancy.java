@@ -17,9 +17,6 @@ public class Vacancy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "status", nullable = false)
-    private Boolean status;
-
     @Column(name = "separated_occupied", nullable = false)
     private Integer separated_ocuppied;
 
