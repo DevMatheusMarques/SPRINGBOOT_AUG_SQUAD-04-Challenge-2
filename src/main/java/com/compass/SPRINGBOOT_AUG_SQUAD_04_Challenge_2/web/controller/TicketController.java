@@ -3,6 +3,10 @@ package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.controller;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Ticket;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoVacanciesAvailableException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.TicketService;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.TicketPostResponseDto;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.TicketResponseDto;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.TicketCreateDto;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.mapper.TicketMapper;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.exceptions.ErrorMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -28,44 +32,44 @@ public class TicketController {
     @Operation(summary = "Issue a new ticket", description = "Resource to issue a new ticket.",
             responses = {
                     @ApiResponse(responseCode = "201", description = "Ticket issued successfully.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Ticket.class))),
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = TicketPostResponseDto.class))),
                     @ApiResponse(responseCode = "400", description = "It was not possible to issue the ticket due to lack of necessary data.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
                     @ApiResponse(responseCode = "409", description = "There are no spaces available for the specified vehicle.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
-    public ResponseEntity<Ticket> create(@RequestBody Ticket ticket) throws NoVacanciesAvailableException {
-        Ticket newTicket = ticketService.saveTicket(ticket);
-        return ResponseEntity.status(HttpStatus.CREATED).body(newTicket);
+    public ResponseEntity<TicketPostResponseDto> create(@RequestBody TicketCreateDto dto) throws NoVacanciesAvailableException {
+        Ticket newTicket = ticketService.saveTicket(TicketMapper.toTicket(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(TicketMapper.toPostDto(newTicket));
     }
 
     @Operation(summary = "Retrieve Tickets", description = "Returns all tickets or part of them based on some passed parameter.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Ticket(s) successfully recovered.",
                             content = @Content(mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = Ticket.class)))),
+                                    array = @ArraySchema(schema = @Schema(implementation = TicketResponseDto.class)))),
                     @ApiResponse(responseCode = "404", description = "Ticket(s) not found based on received parameters.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @GetMapping
-    public ResponseEntity<List<Ticket>> getAllTickets(@RequestParam(value = "type_filter", required = false) String typeFilter,
+    public ResponseEntity<List<TicketResponseDto>> getAllTickets(@RequestParam(value = "type_filter", required = false) String typeFilter,
                                          @RequestParam(value = "value_filter", required = false) String valueFilter) {
         List<Ticket> tickets = ticketService.getTickets(typeFilter, valueFilter);
-        return ResponseEntity.ok(tickets);
+        return ResponseEntity.ok(TicketMapper.toListDto(tickets));
     }
 
     @Operation(summary = "Update ticket", description = "Update ticket with more informations, like final price and time exit.",
             responses = {
                     @ApiResponse(responseCode = "200", description = "Ticket updated suscessfully.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Ticket.class))),
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = TicketResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "Ticket not found to update.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
             })
     @PutMapping("/{id}/exit")
-    public ResponseEntity<Ticket> update(@PathVariable Long id, @RequestBody Ticket ticket) {
+    public ResponseEntity<TicketResponseDto> update(@PathVariable Long id, @RequestBody Ticket ticket) {
         Ticket updatedTicket = ticketService.updateTicket(id, ticket);
-        return ResponseEntity.ok().body(updatedTicket);
+        return ResponseEntity.ok().body(TicketMapper.toDto(updatedTicket));
     }
 
     @Operation(summary = "Delete ticket", description = "Delete the ticket with the id received.",
