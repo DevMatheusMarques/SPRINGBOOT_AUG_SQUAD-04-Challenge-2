@@ -9,5 +9,5 @@ import lombok.Setter;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class TicketCreateDto {
     private Vehicle vehicle;
-    private Integer entryGate;
+    private Integer entryCancel;
 }

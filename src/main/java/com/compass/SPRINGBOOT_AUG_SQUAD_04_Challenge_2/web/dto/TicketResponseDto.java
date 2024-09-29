@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 public class TicketResponseDto {
     private LocalDateTime dateTimeEntry;
     private LocalDateTime dateTimeExit;
-    private Integer entryGate;
-    private Integer exitGate;
+    private Integer entryCancel;
+    private Integer exitCancel;
     private Double finalPrice;
     private String plate;
 }
