@@ -46,4 +46,11 @@ public class Vehicle implements Serializable {
     @OneToMany(mappedBy = "vehicle")
     @JsonIgnore
     private List<Ticket> ticket;
+
+    //Constructor for DTO
+    public Vehicle(String plate, TypeVehicle typeVehicle, Category category) {
+        this.plate = plate;
+        this.typeVehicle = typeVehicle;
+        this.category = category;
+    }
 }
