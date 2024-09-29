@@ -2,6 +2,7 @@ package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services;
 
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.mapper.VacancyMapper;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vacancy;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoResultsFoundException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.VacancyRepository;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyCreateDto;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyResponseDto;
@@ -38,7 +39,31 @@ public class VacancyService {
             }
             return vacancyRepository.save(vacancy);
         } else {
-            throw new RuntimeException("Vacancy not found with id: " + id);
+            throw new NoResultsFoundException("Vacancy not found with id: " + id);
+        }
+    }
+
+    public void updateVacancyOccupied(Long id, Integer newSeparatedOccupied, Integer newMonthlyOccupied) {
+        Optional<Vacancy> vacancyOptional = vacancyRepository.findById(id);
+        if (vacancyOptional.isPresent()) {
+            Vacancy vacancy = vacancyOptional.get();
+
+            boolean updated = false;
+
+            if (newSeparatedOccupied != null && !newSeparatedOccupied.equals(vacancy.getSeparated_ocuppied())){
+                vacancy.setSeparated_ocuppied(newSeparatedOccupied);
+                updated = true;
+            }
+            if (newMonthlyOccupied != null && !newMonthlyOccupied.equals(vacancy.getMonthly_capacity())) {
+                vacancy.setMonthly_occupied(newMonthlyOccupied);
+                updated = true;
+            }
+
+            if (updated) {
+                vacancyRepository.save(vacancy);
+            }
+        } else {
+            throw new NoResultsFoundException("Vacancy not found with id: " + id);
         }
     }
 
