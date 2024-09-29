@@ -1,6 +1,7 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.controller;
 
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Ticket;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoVacanciesAvailableException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.TicketService;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.TicketPostResponseDto;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.TicketResponseDto;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/tickets")
+@RequestMapping("/api/v1/tickets")
 @RequiredArgsConstructor
 @Tag(name = "Tickets", description = "Contains all operations related to resources for registering, editing and reading a user.")
 public class TicketController {
@@ -38,7 +39,7 @@ public class TicketController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
-    public ResponseEntity<TicketPostResponseDto> create(@RequestBody TicketCreateDto dto) {
+    public ResponseEntity<TicketPostResponseDto> create(@RequestBody TicketCreateDto dto) throws NoVacanciesAvailableException {
         Ticket newTicket = ticketService.saveTicket(TicketMapper.toTicket(dto));
         return ResponseEntity.status(HttpStatus.CREATED).body(TicketMapper.toPostDto(newTicket));
     }

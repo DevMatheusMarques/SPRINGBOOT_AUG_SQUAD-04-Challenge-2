@@ -1,19 +1,21 @@
-package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.utils;
+package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services;
 
-import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vacancy;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vehicle;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.Category;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.TypeVehicle;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoVacanciesAvailableException;
-import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.VacancyService;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyResponseDto;
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
-public class Parking {
+public class ParkingService {
 
     private Integer totalSpaces;
     private Integer capacityMonthly ;
@@ -21,25 +23,23 @@ public class Parking {
     private Integer occupiedMonthly ;
     private Integer occupiedSeparated;
 
-    @Autowired
-    private VacancyService vacancyService;
+    private final VacancyService vacancyService;
 
-    private List<Integer> vacancies;
+    private final List<Integer> vacancies = new ArrayList<>();
 
-    public Parking(VacancyService vacancyService) {
-        this.vacancyService = vacancyService;
+    @PostConstruct
+    public void init() {
         try {
-            List<Vacancy> vacanciesBd = vacancyService.getAllVacancies();
+            List<VacancyResponseDto> vacanciesBd = vacancyService.getAllVacancies();
 
             this.occupiedMonthly  = vacanciesBd.getFirst().getMonthly_occupied();
-            this.occupiedSeparated = vacanciesBd.getFirst().getSeparated_ocuppied();
+            this.occupiedSeparated = vacanciesBd.getFirst().getSeparated_occupied();
             this.capacityMonthly  = vacanciesBd.getFirst().getMonthly_capacity();
             this.capacitySeparated = vacanciesBd.getFirst().getSeparated_capacity();
 
             this.totalSpaces = capacityMonthly + capacitySeparated;
 
             // Initializes the list of spaces, all starting as free (0)
-            this.vacancies = new ArrayList<>();
             for (int i = 0; i < this.totalSpaces; i++) {
                 this.vacancies.add(0); // Initially, all spaces are free (0
             }
@@ -63,18 +63,14 @@ public class Parking {
         return totalSpaces - occupiedSpaces ; // Returns the number of free spaces
     }
 
-    private int findAvailableSpaces(Vehicle vehicle) {
-
-        TypeVehicle type = vehicle.getTypeVehicle();
-        Category category = vehicle.getCategory();
-
+    private int findAvailableSpaces(Category category, TypeVehicle type) {
         int size =  type.equals(TypeVehicle.MOTOCYCLE) ? 1 :
                     type.equals(TypeVehicle.PASSENGER_CAR) ? 2 :
                     type.equals(TypeVehicle.DELIVERY_TRUCK) ? 4 : 0;
 
         // Defines the range of spaces to consider, depending on whether it's for monthly or temporary
         int start = category.equals(Category.MONTHLY_PAYER) ? 0 : capacityMonthly;
-        int end = category.equals(Category.MONTHLY_PAYER) ? capacityMonthly : totalSpaces;
+        int end = category.equals(Category.MONTHLY_PAYER) ? capacityMonthly : capacitySeparated;
 
         // Looks for a block of free spaces of the required size
         for (int i = start; i <= end - size; i++) {
@@ -92,17 +88,14 @@ public class Parking {
         return -1; // Returns -1 if there is no block of free spaces of the required size
     }
 
-    public void vehicleEntry(Vehicle vehicle) throws NoVacanciesAvailableException {
-        TypeVehicle type = vehicle.getTypeVehicle();
-        Category category = vehicle.getCategory();
-
+    public Integer vehicleEntry(Category category, TypeVehicle type) throws NoVacanciesAvailableException {
         int size =  type.equals(TypeVehicle.MOTOCYCLE) ? 1 :
                     type.equals(TypeVehicle.PASSENGER_CAR) ? 2 :
                     type.equals(TypeVehicle.DELIVERY_TRUCK) ? 4 : 0;
 
         boolean isMonthly = category.equals(Category.MONTHLY_PAYER);
 
-        int initialSpace = findAvailableSpaces(vehicle);
+        int initialSpace = findAvailableSpaces(category, type);
 
         if (initialSpace == -1) {
             throw new NoVacanciesAvailableException(String.format("No available spaces for " + type + " " + (isMonthly ? "monthly" : "temporary")));
@@ -110,18 +103,20 @@ public class Parking {
 
         // Occupies the spaces for the vehicle
         for (int i = 0; i < size; i++) {
-            vacancies.set(initialSpace  + i, 1); // Marks the spaces as occupied
+            vacancies.set(initialSpace + i, 1); // Marks the spaces as occupied
         }
 
-        List<Vacancy> vacanciesBd = vacancyService.getAllVacancies();
+        List<VacancyResponseDto> vacanciesBd = vacancyService.getAllVacancies();
 
         if (isMonthly) { //
             occupiedMonthly += size;
-            vacancyService.updateVacancyOccupied(vacanciesBd.getFirst().getId(), null, occupiedMonthly);
+            vacancyService.updateVacancyOccupied(1L, null, occupiedMonthly);
         } else {
             occupiedSeparated += size;
-            vacancyService.updateVacancyOccupied(vacanciesBd.getFirst().getId(), occupiedSeparated, null );
+            vacancyService.updateVacancyOccupied(1L, occupiedSeparated, null );
         }
+
+        return initialSpace;
     }
 
     public void vehicleExit(int initialSpace, Vehicle vehicle) {
@@ -136,18 +131,32 @@ public class Parking {
 
         // Frees the spaces that the vehicle occupied
         for (int i = 0; i < size; i++) {
-                vacancies.set(initialSpace - 1 + i, 0); // Marks the spaces as free (adjust for 1-based index)
+                vacancies.set(initialSpace + i, 0); // Marks the spaces as free (adjust for 1-based index)
         }
 
-        List<Vacancy> vacanciesBd = vacancyService.getAllVacancies();
+        List<VacancyResponseDto> vacanciesBd = vacancyService.getAllVacancies();
 
         if (isMonthly) { //
             occupiedMonthly -= size;
-            vacancyService.updateVacancyOccupied(vacanciesBd.getFirst().getId(), null, occupiedMonthly);
+            vacancyService.updateVacancyOccupied(1L, null, occupiedMonthly);
         } else {
             occupiedSeparated -= size;
-            vacancyService.updateVacancyOccupied(vacanciesBd.getFirst().getId(), occupiedSeparated, null );
+            vacancyService.updateVacancyOccupied(1L, occupiedSeparated, null );
         }
+    }
+
+    public List<Integer> recoverVacancies(int initialSpace, TypeVehicle type) {
+        int size =  type.equals(TypeVehicle.MOTOCYCLE) ? 1 :
+                type.equals(TypeVehicle.PASSENGER_CAR) ? 2 :
+                        type.equals(TypeVehicle.DELIVERY_TRUCK) ? 4 : 0;
+
+        List<Integer> vagas = new ArrayList<>();
+
+        for (int i = 0; i < size; i++) {
+            vagas.add(initialSpace + i); // Marks the spaces as occupied
+        }
+
+        return vagas;
     }
 
 }

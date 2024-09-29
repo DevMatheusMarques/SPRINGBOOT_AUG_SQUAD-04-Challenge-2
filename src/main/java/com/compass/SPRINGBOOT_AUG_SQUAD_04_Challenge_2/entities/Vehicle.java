@@ -28,8 +28,10 @@ public class Vehicle implements Serializable {
     @Column(name = "plate", nullable = false, length = 9, unique = true)
     private String plate;
     @Column(name = "category", nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
     private Category category;
     @Column(name = "type_vehicle", nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
     private TypeVehicle typeVehicle;
 
     @CreatedDate
@@ -38,10 +40,6 @@ public class Vehicle implements Serializable {
     @LastModifiedDate
     @Column(name = "date_modified")
     private LocalDateTime dateModified;
-
-    @OneToOne
-    @JoinColumn(name = "vacany.id", referencedColumnName = "id")
-    private Vacancy vacancy;
 
     @OneToMany(mappedBy = "vehicle")
     @JsonIgnore

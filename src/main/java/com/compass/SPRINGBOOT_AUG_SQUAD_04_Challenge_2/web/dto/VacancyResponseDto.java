@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class VacancyResponseDto {
 
+    private Long id;
     private Integer separated_occupied;
     private Integer separated_capacity;
     private Integer monthly_occupied;

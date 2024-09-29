@@ -7,6 +7,7 @@ import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.VacancyRepos
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyCreateDto;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyResponseDto;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class VacancyService {
 
@@ -54,7 +56,7 @@ public class VacancyService {
                 vacancy.setSeparated_ocuppied(newSeparatedOccupied);
                 updated = true;
             }
-            if (newMonthlyOccupied != null && !newMonthlyOccupied.equals(vacancy.getMonthly_capacity())) {
+            if (newMonthlyOccupied != null && !newMonthlyOccupied.equals(vacancy.getMonthly_occupied())) {
                 vacancy.setMonthly_occupied(newMonthlyOccupied);
                 updated = true;
             }
