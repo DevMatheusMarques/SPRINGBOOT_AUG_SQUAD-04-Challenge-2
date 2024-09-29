@@ -3,6 +3,9 @@ package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Payment;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Ticket;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vehicle;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.Category;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.TypeVehicle;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoVacanciesAvailableException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.TicketRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +22,10 @@ public class TicketService {
 
     private final TicketRepository ticketRepository;
     private final VehicleService vehicleService;
+    private final ParkingService parkingService;
 
     @Transactional
-    public Ticket saveTicket(Ticket ticket) {
+    public Ticket saveTicket(Ticket ticket) throws NoVacanciesAvailableException {
         String plate = ticket.getVehicle().getPlate();
         TypeVehicle typeVehicle = ticket.getVehicle().getTypeVehicle();
         Vehicle vehicle = vehicleService.findTicketVehicleByPlate(plate);
@@ -37,6 +41,13 @@ public class TicketService {
         }
         if (activeTicket != null) {
             throw new IllegalStateException("This vehicle is already in the parking lot.");
+        }
+
+        boolean allowedEntry = CancelService.allowEntry(vehicle.getTypeVehicle(), ticket.getEntryCancel());
+
+        if (allowedEntry) {
+            Integer entry = parkingService.vehicleEntry(vehicle.getCategory(), vehicle.getTypeVehicle());
+            ticket.setVacanciesOccupied(entry);
         }
 
         ticket.setVehicle(vehicle);
@@ -89,14 +100,22 @@ public class TicketService {
         if (activeTicket == null || !activeTicket.getId().equals(ticketToUpdate.getId())) {
             throw new IllegalStateException("You cannot update an inactive ticket.");
         }
+
         ticketToUpdate.setDateTimeExit(ticket.getDateTimeExit());
-        ticketToUpdate.setExitGate(ticket.getExitGate());
+        ticketToUpdate.setExitCancel(ticket.getExitCancel());
+
+        boolean allowedExit = CancelService.allowExit(ticketToUpdate.getVehicle().getTypeVehicle(), ticketToUpdate.getExitCancel());
+
+        if (allowedExit) {
+            parkingService.vehicleExit(ticketToUpdate.getVacanciesOccupied(), ticketToUpdate.getVehicle());
+        }
 
         Payment payment = new Payment(ticketToUpdate);
         Double finalPrice = payment.calculateValue();
 
-        ticketToUpdate.setParked(Boolean.FALSE);
         ticketToUpdate.setFinalPrice(finalPrice);
+
+        ticketToUpdate.setParked(Boolean.FALSE);
 
         return ticketRepository.save(ticketToUpdate);
     }
