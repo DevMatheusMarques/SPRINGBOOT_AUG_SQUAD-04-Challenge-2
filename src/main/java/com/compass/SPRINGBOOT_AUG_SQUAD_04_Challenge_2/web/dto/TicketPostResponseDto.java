@@ -13,6 +13,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TicketPostResponseDto {
     private LocalDateTime dateTimeEntry;
-    private Integer entryGate;
+    private Integer entryCancel;
     private String plate;
 }
