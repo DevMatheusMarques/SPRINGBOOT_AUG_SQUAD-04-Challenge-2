@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -14,12 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TicketResponseDto {
-    private Long id;
-    private Vehicle vehicle;
     private String plate;
     private Boolean parked;
-    private LocalDateTime dateTimeEntry;
-    private LocalDateTime dateTimeExit;
+    private String dateTimeEntryFormatted;
+    private String dateTimeExitFormatted;
     private Integer entryCancel;
     private Integer exitCancel;
     private Double finalPrice;

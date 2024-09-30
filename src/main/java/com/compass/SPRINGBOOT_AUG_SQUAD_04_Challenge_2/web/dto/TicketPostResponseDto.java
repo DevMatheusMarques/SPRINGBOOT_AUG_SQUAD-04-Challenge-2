@@ -14,11 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TicketPostResponseDto {
-    private Long id;
-    private Vehicle vehicle;
-    private String plate;
-    private Boolean parked;
-    private LocalDateTime dateTimeEntry;
     private Integer entryCancel;
+    private String plate;
+    private String dateTimeEntryFormatted;
+    private Boolean parked;
     private List<Integer> vacanciesOccupied;
 }
