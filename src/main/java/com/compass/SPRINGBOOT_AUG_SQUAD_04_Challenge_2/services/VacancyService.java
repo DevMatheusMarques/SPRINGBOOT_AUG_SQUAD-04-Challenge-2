@@ -1,5 +1,6 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services;
 
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.IllegalUpdateVacancyException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.mapper.VacancyMapper;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vacancy;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoResultsFoundException;
@@ -34,9 +35,16 @@ public class VacancyService {
         if (vacancyOptional.isPresent()) {
             Vacancy vacancy = vacancyOptional.get();
             if (newSeparatedCapacity != null) {
+                if(newSeparatedCapacity < vacancy.getSeparated_ocuppied()){
+                    throw new IllegalUpdateVacancyException("The requested capacity is less than the current number of parked vehicles");
+                }
                 vacancy.setSeparated_capacity(newSeparatedCapacity);
             }
             if (newMonthlyCapacity != null) {
+
+                if(newMonthlyCapacity < vacancy.getMonthly_occupied()){
+                    throw new IllegalUpdateVacancyException("The requested capacity is less than the current number of parked vehicles");
+                }
                 vacancy.setMonthly_capacity(newMonthlyCapacity);
             }
             return vacancyRepository.save(vacancy);
@@ -66,30 +74,6 @@ public class VacancyService {
             }
         } else {
             throw new NoResultsFoundException("Vacancy not found with id: " + id);
-        }
-    }
-
-    public Vacancy updateVacancy(Long id, VacancyCreateDto createDto) {
-        Optional<Vacancy> vacancyOptional = vacancyRepository.findById(id);
-        if (vacancyOptional.isPresent()) {
-            Vacancy vacancy = vacancyOptional.get();
-
-            if (createDto.getSeparated_capacity() != null) {
-                vacancy.setSeparated_capacity(createDto.getSeparated_capacity());
-            }
-            if (createDto.getMonthly_capacity() != null) {
-                vacancy.setMonthly_capacity(createDto.getMonthly_capacity());
-            }
-            if (createDto.getSeparated_occupied() != null) {
-                vacancy.setSeparated_ocuppied(createDto.getSeparated_occupied());
-            }
-            if (createDto.getMonthly_occupied() != null) {
-                vacancy.setMonthly_occupied(createDto.getMonthly_occupied());
-            }
-
-            return vacancyRepository.save(vacancy);
-        } else {
-            throw new RuntimeException("Vacancy not found with id: " + id);
         }
     }
 }

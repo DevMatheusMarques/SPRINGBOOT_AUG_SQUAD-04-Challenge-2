@@ -3,8 +3,7 @@ package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vehicle;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.Category;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.TypeVehicle;
-import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.InvalidVehicleCategoryException;
-import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoResultsFoundException;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.*;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.VehicleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +26,7 @@ public class VehicleService {
         String plate = vehicle.getPlate();
         Optional<Object> newVehicle = vehicleRepository.findByPlate(plate);
         if (newVehicle.isPresent()){
-            throw new DataIntegrityViolationException("This vehicle already exists.");
+            throw new VehicleAlreadyExistsException("This vehicle already exists.");
         }
         if (vehicle.getCategory() == Category.MONTHLY_PAYER) {
             if (vehicle.getTypeVehicle() != TypeVehicle.MOTORCYCLE && vehicle.getTypeVehicle() != TypeVehicle.PASSENGER_CAR) {
@@ -54,29 +53,19 @@ public class VehicleService {
 
     @Transactional(readOnly = true)
     public List<Vehicle> findAllVehicles() {
-        try {
             return vehicleRepository.findAll();
-        } catch (NoResultsFoundException e) {
-            throw new NoResultsFoundException("No results found for the query.");
-        }
     }
 
     @Transactional(readOnly = true)
     public Vehicle findVehicleById(Long id) {
-        try {
-            return vehicleRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        } catch (EntityNotFoundException e) {
-            throw new EntityNotFoundException("Vehicle not found");
-        }
+            return vehicleRepository.findById(id).orElseThrow(
+                    () -> new NoResultsFoundException("Vehicle not found"));
     }
 
     @Transactional(readOnly = true)
     public Vehicle findVehicleByPlate(String plate) {
-        try {
-            return (Vehicle) vehicleRepository.findByPlate(plate).orElseThrow(EntityNotFoundException::new);
-        } catch (EntityNotFoundException e) {
-            throw new EntityNotFoundException("Vehicle not found");
-        }
+            return (Vehicle) vehicleRepository.findByPlate(plate).orElseThrow(
+                    () -> new NoResultsFoundException("Vehicle not found"));
     }
 
     @Transactional(readOnly = true)
@@ -107,7 +96,7 @@ public class VehicleService {
             vehicleToUpdate.setDateModified(LocalDateTime.now());
             return vehicleRepository.save(vehicleToUpdate);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityViolationException("Unable to change vehicle data");
+            throw new IllegalUpdateVehicleException("Unable to change vehicle data");
         }
     }
 

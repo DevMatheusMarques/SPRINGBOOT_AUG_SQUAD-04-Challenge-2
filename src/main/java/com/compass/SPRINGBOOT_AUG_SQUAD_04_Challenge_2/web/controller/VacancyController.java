@@ -27,7 +27,7 @@ public class VacancyController {
     @PatchMapping("/{id}")
     public VacancyResponseDto updateVacancyCapacity(@PathVariable Long id,
                                                     @RequestBody VacancyCreateDto createDto) {
-        Vacancy updatedVacancy   = vacancyService.updateVacancy(id, createDto);
+        Vacancy updatedVacancy   = vacancyService.updateVacancyCapacity(id, createDto.getSeparated_capacity(), createDto.getMonthly_capacity());
         return VacancyMapper.toResponseDto(updatedVacancy);
     }
 }

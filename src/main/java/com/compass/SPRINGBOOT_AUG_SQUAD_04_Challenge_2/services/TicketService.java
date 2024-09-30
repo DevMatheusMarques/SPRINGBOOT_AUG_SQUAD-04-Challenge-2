@@ -5,7 +5,9 @@ import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Ticket;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vehicle;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.Category;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.TypeVehicle;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoResultsFoundException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoVacanciesAvailableException;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.VehicleInParkingException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.VehicleNotRegisteredException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.TicketRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -50,18 +52,19 @@ public class TicketService {
             vehicleService.saveVehicleTicket(vehicle);
         }
         if (activeTicket != null) {
-            throw new DataIntegrityViolationException("This vehicle is already in the parking lot.");
+            throw new VehicleInParkingException("This vehicle is already in the parking lot.");
         }
 
         boolean allowedEntry = CancelService.allowEntry(vehicle.getTypeVehicle(), ticket.getEntryCancel());
 
         if (allowedEntry) {
-            List<Integer> occupiedSpaces = parkingService.vehicleEntry(vehicle.getCategory(), vehicle.getTypeVehicle());
-            ticket.setVacanciesOccupied(occupiedSpaces);
-            Integer entry = occupiedSpaces.getFirst();
-            ticket.setInitialVacancyOccupied(entry);
+            if(!vehicle.getTypeVehicle().equals(TypeVehicle.PUBLIC_SERVICE)){
+                List<Integer> occupiedSpaces = parkingService.vehicleEntry(vehicle.getCategory(), vehicle.getTypeVehicle());
+                ticket.setVacanciesOccupied(occupiedSpaces);
+                Integer entry = occupiedSpaces.getFirst();
+                ticket.setInitialVacancyOccupied(entry);
+            }
         }
-
         ticket.setVehicle(vehicle);
         ticket.setParked(Boolean.TRUE);
         ticket.setDateTimeEntry(LocalDateTime.now());
@@ -77,14 +80,14 @@ public class TicketService {
     @Transactional(readOnly = true)
     public Ticket findTicketById(Long id) {
         return ticketRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Ticket not found"));
+                .orElseThrow(() -> new NoResultsFoundException("Ticket not found"));
     }
 
     @Transactional(readOnly = true)
     public List<Ticket> findTicketsByPlate(String plate) {
         List<Ticket> tickets = ticketRepository.findByVehicle_Plate(plate);
         if (tickets.isEmpty()) {
-            throw new EntityNotFoundException("No tickets found for vehicle with plate: " + plate);
+            throw new NoResultsFoundException("No tickets found for vehicle with plate: " + plate);
         }
         return tickets;
     }
@@ -120,7 +123,9 @@ public class TicketService {
 
         boolean allowedExit = CancelService.allowExit(ticketToUpdate.getVehicle().getTypeVehicle(), ticketToUpdate.getExitCancel());
         if (allowedExit) {
-            parkingService.vehicleExit(ticketToUpdate.getInitialVacancyOccupied(), ticketToUpdate.getVehicle());
+            if(!ticketToUpdate.getVehicle().getTypeVehicle().equals(TypeVehicle.PUBLIC_SERVICE)) {
+                parkingService.vehicleExit(ticketToUpdate.getInitialVacancyOccupied(), ticketToUpdate.getVehicle());
+            }
         }
 
         if (typeVehicle == TypeVehicle.DELIVERY_TRUCK || typeVehicle == TypeVehicle.PUBLIC_SERVICE || category == Category.MONTHLY_PAYER) {
