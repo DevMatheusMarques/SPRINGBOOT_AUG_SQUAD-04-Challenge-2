@@ -35,7 +35,6 @@ public class TicketMapper {
         PropertyMap<Ticket, TicketResponseDto> props = new PropertyMap<>() {
             @Override
             protected void configure() {
-                map().setPlate(plate);
                 map().setDateTimeEntryFormatted(dateTimeEntryFormetted);
                 map().setDateTimeExitFormatted(dateTimeExitFormatted);
             }
@@ -57,7 +56,6 @@ public class TicketMapper {
         PropertyMap<Ticket, TicketPostResponseDto> props = new PropertyMap<Ticket, TicketPostResponseDto>() {
             @Override
             protected void configure() {
-                map().setPlate(plate);
                 map().setDateTimeEntryFormatted(dateTimeEntryFormetted);
             }
         };

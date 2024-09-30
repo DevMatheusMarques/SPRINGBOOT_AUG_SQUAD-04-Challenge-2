@@ -14,8 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TicketPostResponseDto {
+    private Vehicle vehicle;
     private Integer entryCancel;
-    private String plate;
     private String dateTimeEntryFormatted;
     private Boolean parked;
     private List<Integer> vacanciesOccupied;

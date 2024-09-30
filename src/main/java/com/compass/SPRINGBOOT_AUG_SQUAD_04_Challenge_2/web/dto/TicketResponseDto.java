@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TicketResponseDto {
-    private String plate;
+    private Vehicle vehicle;
     private Boolean parked;
     private String dateTimeEntryFormatted;
     private String dateTimeExitFormatted;
