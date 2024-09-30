@@ -21,7 +21,7 @@ public class CancelService {
                 // Passenger cars and Public Service vehicles can enter through any entry cancel
                 return openCancel();
 
-            case MOTOCYCLE:
+            case MOTORCYCLE:
                 // Motorcycles can only enter through cancel 5
                 if (cancel == 5) {
                     return openCancel();
@@ -54,7 +54,7 @@ public class CancelService {
                 // Passenger cars, Public Service, and Delivery trucks can exit through any exit cancel
                 return openCancel();
 
-            case MOTOCYCLE:
+            case MOTORCYCLE:
                 // Motorcycles can only exit through cancel 10
                 if (cancel == 10) {
                     return openCancel();

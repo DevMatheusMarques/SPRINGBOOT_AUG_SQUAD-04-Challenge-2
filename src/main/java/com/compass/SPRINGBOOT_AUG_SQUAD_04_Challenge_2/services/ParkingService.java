@@ -64,7 +64,7 @@ public class ParkingService {
     }
 
     private int findAvailableSpaces(Category category, TypeVehicle type) {
-        int size =  type.equals(TypeVehicle.MOTOCYCLE) ? 1 :
+        int size =  type.equals(TypeVehicle.MOTORCYCLE) ? 1 :
                     type.equals(TypeVehicle.PASSENGER_CAR) ? 2 :
                     type.equals(TypeVehicle.DELIVERY_TRUCK) ? 4 : 0;
 
@@ -88,8 +88,8 @@ public class ParkingService {
         return -1; // Returns -1 if there is no block of free spaces of the required size
     }
 
-    public Integer vehicleEntry(Category category, TypeVehicle type) throws NoVacanciesAvailableException {
-        int size =  type.equals(TypeVehicle.MOTOCYCLE) ? 1 :
+    public List<Integer> vehicleEntry(Category category, TypeVehicle type) throws NoVacanciesAvailableException {
+        int size =  type.equals(TypeVehicle.MOTORCYCLE) ? 1 :
                     type.equals(TypeVehicle.PASSENGER_CAR) ? 2 :
                     type.equals(TypeVehicle.DELIVERY_TRUCK) ? 4 : 0;
 
@@ -116,14 +116,14 @@ public class ParkingService {
             vacancyService.updateVacancyOccupied(1L, occupiedSeparated, null );
         }
 
-        return initialSpace;
+        return recoverVacancies(initialSpace, type);
     }
 
     public void vehicleExit(int initialSpace, Vehicle vehicle) {
         TypeVehicle type = vehicle.getTypeVehicle();
         Category category = vehicle.getCategory();
 
-        int size =  type.equals(TypeVehicle.MOTOCYCLE) ? 1 :
+        int size =  type.equals(TypeVehicle.MOTORCYCLE) ? 1 :
                     type.equals(TypeVehicle.PASSENGER_CAR) ? 2 :
                     type.equals(TypeVehicle.DELIVERY_TRUCK) ? 4 : 0;
 
@@ -146,17 +146,17 @@ public class ParkingService {
     }
 
     public List<Integer> recoverVacancies(int initialSpace, TypeVehicle type) {
-        int size =  type.equals(TypeVehicle.MOTOCYCLE) ? 1 :
+        int size =  type.equals(TypeVehicle.MOTORCYCLE) ? 1 :
                 type.equals(TypeVehicle.PASSENGER_CAR) ? 2 :
                         type.equals(TypeVehicle.DELIVERY_TRUCK) ? 4 : 0;
 
-        List<Integer> vagas = new ArrayList<>();
+        List<Integer> vacancies = new ArrayList<>();
 
         for (int i = 0; i < size; i++) {
-            vagas.add(initialSpace + i); // Marks the spaces as occupied
+            vacancies.add(initialSpace + i); // Marks the spaces as occupied
         }
 
-        return vagas;
+        return vacancies;
     }
 
 }
