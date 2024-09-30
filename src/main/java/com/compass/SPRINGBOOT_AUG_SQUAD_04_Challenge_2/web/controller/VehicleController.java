@@ -27,12 +27,6 @@ public class VehicleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(VehicleMapper.toDto(vehicle));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<VehicleResponseDto> getById(@PathVariable Long id) {
-        Vehicle vehicle = vehicleService.findVehicleById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(VehicleMapper.toDto(vehicle));
-    }
-
     @GetMapping("/{plate}")
     public ResponseEntity<VehicleResponseDto> getByPlate(@PathVariable String plate) {
         Vehicle vehicle = vehicleService.findVehicleByPlate(plate);
@@ -41,13 +35,13 @@ public class VehicleController {
 
     @GetMapping
     public ResponseEntity<List<VehicleResponseDto>> getAll() {
-        Vehicle vehicles = (Vehicle) vehicleService.findAllVehicles();
-        return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonList(VehicleMapper.toDto(vehicles)));
+        List<Vehicle> vehicles = vehicleService.findAllVehicles();
+        return ResponseEntity.ok(VehicleMapper.toListDto(vehicles));
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<VehicleResponseDto> update(@PathVariable Vehicle id) {
-        Vehicle vehicleDto = vehicleService.updateVehicle(id);
+    public ResponseEntity<VehicleResponseDto> update(@PathVariable Long id, @RequestBody Vehicle vehicle) {
+        Vehicle vehicleDto = vehicleService.updateVehicle(id, vehicle);
         return ResponseEntity.status(HttpStatus.OK).body(VehicleMapper.toDto(vehicleDto));
     }
 
