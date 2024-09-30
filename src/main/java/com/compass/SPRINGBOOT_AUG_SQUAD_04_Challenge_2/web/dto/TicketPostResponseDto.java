@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TicketPostResponseDto {
-    private LocalDateTime dateTimeEntry;
     private Integer entryCancel;
     private String plate;
+    private String dateTimeEntryFormatted;
 }

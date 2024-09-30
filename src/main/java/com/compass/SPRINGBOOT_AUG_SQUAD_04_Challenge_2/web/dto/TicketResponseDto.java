@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TicketResponseDto {
-    private LocalDateTime dateTimeEntry;
-    private LocalDateTime dateTimeExit;
     private Integer entryCancel;
     private Integer exitCancel;
     private Double finalPrice;
     private String plate;
+    private String dateTimeEntryFormatted;
+    private String dateTimeExitFormatted;
 }
