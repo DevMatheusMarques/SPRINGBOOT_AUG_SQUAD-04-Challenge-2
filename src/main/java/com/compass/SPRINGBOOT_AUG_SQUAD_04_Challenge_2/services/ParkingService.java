@@ -70,7 +70,7 @@ public class ParkingService {
 
         // Defines the range of spaces to consider, depending on whether it's for monthly or temporary
         int start = category.equals(Category.MONTHLY_PAYER) ? 0 : capacityMonthly;
-        int end = category.equals(Category.MONTHLY_PAYER) ? capacityMonthly : capacitySeparated;
+        int end = category.equals(Category.MONTHLY_PAYER) ? capacityMonthly : vacancies.size();
 
         // Looks for a block of free spaces of the required size
         for (int i = start; i <= end - size; i++) {
@@ -108,11 +108,17 @@ public class ParkingService {
 
         List<VacancyResponseDto> vacanciesBd = vacancyService.getAllVacancies();
 
-        if (isMonthly) { //
+        if (isMonthly) {
             occupiedMonthly += size;
+            if(occupiedMonthly > capacityMonthly) {
+                throw new NoVacanciesAvailableException("No available spaces for monthly");
+            }
             vacancyService.updateVacancyOccupied(1L, null, occupiedMonthly);
         } else {
             occupiedSeparated += size;
+            if(occupiedSeparated > capacitySeparated) {
+                throw new NoVacanciesAvailableException("No available spaces for Separeted");
+            }
             vacancyService.updateVacancyOccupied(1L, occupiedSeparated, null );
         }
 

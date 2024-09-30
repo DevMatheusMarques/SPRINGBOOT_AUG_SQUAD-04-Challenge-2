@@ -21,14 +21,28 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Service class responsible for managing ticket operations within the parking system.
+ * It handles creating, retrieving, updating, and deleting tickets, as well as
+ * validating vehicle entries and exits.
+ */
 @Service
 @RequiredArgsConstructor
 public class TicketService {
 
-    private final TicketRepository ticketRepository;
-    private final VehicleService vehicleService;
-    private final ParkingService parkingService;
+    private final TicketRepository ticketRepository;  // Repository for ticket data access
+    private final VehicleService vehicleService;      // Service for vehicle operations
+    private final ParkingService parkingService;      // Service for parking operations
 
+    /**
+     * Saves a new ticket into the system. If the vehicle is not registered,
+     * it registers the vehicle based on its type. It also checks for active
+     * tickets to prevent duplicate entries for the same vehicle.
+     *
+     * @param ticket the ticket to be saved
+     * @return the saved Ticket object
+     * @throws NoVacanciesAvailableException if there are no available parking spaces
+     */
     @Transactional
     public Ticket saveTicket(Ticket ticket) throws NoVacanciesAvailableException {
         String plate = ticket.getVehicle().getPlate();
@@ -72,17 +86,36 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
+    /**
+     * Retrieves all tickets from the system.
+     *
+     * @return a list of all Ticket objects
+     */
     @Transactional(readOnly = true)
     public List<Ticket> findAllTickets() {
         return ticketRepository.findAll();
     }
 
+    /**
+     * Finds a ticket by its ID.
+     *
+     * @param id the ID of the ticket to find
+     * @return the found Ticket object
+     * @throws NoResultsFoundException if no ticket is found with the given ID
+     */
     @Transactional(readOnly = true)
     public Ticket findTicketById(Long id) {
         return ticketRepository.findById(id)
                 .orElseThrow(() -> new NoResultsFoundException("Ticket not found"));
     }
 
+    /**
+     * Finds tickets associated with a specific vehicle plate.
+     *
+     * @param plate the plate of the vehicle to search for tickets
+     * @return a list of Ticket objects associated with the specified plate
+     * @throws NoResultsFoundException if no tickets are found for the given plate
+     */
     @Transactional(readOnly = true)
     public List<Ticket> findTicketsByPlate(String plate) {
         List<Ticket> tickets = ticketRepository.findByVehicle_Plate(plate);
@@ -92,6 +125,14 @@ public class TicketService {
         return tickets;
     }
 
+    /**
+     * Retrieves tickets based on specified filters (either by ID or plate).
+     *
+     * @param typeFilter the type of filter (either "id" or "plate")
+     * @param valueFilter the value to filter by
+     * @return a list of matching Ticket objects
+     * @throws IllegalArgumentException if the filter type is invalid
+     */
     @Transactional(readOnly = true)
     public List<Ticket> getTickets(String typeFilter, String valueFilter) {
         if (typeFilter == null || valueFilter == null) {
@@ -107,6 +148,15 @@ public class TicketService {
         }
     }
 
+    /**
+     * Updates an existing ticket. It checks if the ticket is active before updating
+     * the exit time and calculates the final price based on the vehicle type.
+     *
+     * @param id the ID of the ticket to update
+     * @param ticket the Ticket object with updated information
+     * @return the updated Ticket object
+     * @throws IllegalStateException if trying to update an inactive ticket
+     */
     @Transactional
     public Ticket updateTicket(Long id, Ticket ticket) {
         Ticket ticketToUpdate = findTicketById(id);
@@ -141,10 +191,21 @@ public class TicketService {
         return ticketRepository.save(ticketToUpdate);
     }
 
+    /**
+     * Finds an active ticket based on the vehicle's plate.
+     *
+     * @param plate the plate of the vehicle
+     * @return the active Ticket object if found
+     */
     public Ticket findActiveTicketByVehiclePlate(String plate) {
         return ticketRepository.findActiveTicketByVehiclePlate(plate);
     }
 
+    /**
+     * Deletes a ticket by its ID.
+     *
+     * @param id the ID of the ticket to delete
+     */
     @Transactional
     public void deleteTicket(Long id) {
         Ticket ticket = findTicketById(id);
