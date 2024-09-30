@@ -1,0 +1,515 @@
+[33mcommit 3becb9a77b34b5406af36ea30768b46f6c076702[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mUpdate-Responses-TicketsDtos[m[33m, [m[1;32mmain[m[33m)[m
+Author: Gustavo Bonfim <dev.gusta.io@gmail.com>
+Date:   Mon Sep 30 00:04:23 2024 -0300
+
+    fix: update return dateTime responses DTO's
+
+[33mcommit 20bdd1ef5ce7cea3c5ea5a1e9f281b9474aefdfb[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 0e263ac 295a51a
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Sun Sep 29 19:20:07 2024 -0300
+
+    Merge pull request #21 from DevMatheusMarques/create-crud-ticket
+    
+    refactor: Adjustment of ticket Dto's
+
+[33mcommit 295a51a0afe6ca5d0cc233ebe39a5bd0c44de51c[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Sun Sep 29 19:18:53 2024 -0300
+
+    refactor: Adjustment of ticket Dto's
+
+[33mcommit 0e263acf6dfae34c9279715085e4cbac39c5593b[m
+Merge: 05b74e1 4c0c6ea
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Sun Sep 29 17:48:27 2024 -0300
+
+    Merge pull request #20 from DevMatheusMarques/create-crud-ticket
+    
+    refactor: Modified logic for ticket operation
+
+[33mcommit 4c0c6ead9b3553d981838870dc66ecbff2be3ba4[m
+Merge: 6093cb3 05b74e1
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Sun Sep 29 17:48:17 2024 -0300
+
+    Merge branch 'main' into create-crud-ticket
+
+[33mcommit 05b74e1b4001507cc18a4b30989674f139af22c5[m
+Merge: c14951d 6f20e9f
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Sun Sep 29 17:44:26 2024 -0300
+
+    Merge pull request #19 from DevMatheusMarques/DTO-Inclusion
+    
+    DTO and Mapper Inclusion
+
+[33mcommit 6093cb3311130816144b0d4524567c6808506948[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Sun Sep 29 17:40:23 2024 -0300
+
+    refactor: Modified logic for ticket operation
+
+[33mcommit 6f20e9f495a91fc87dc546b2b8fdd20f30d77d3f[m[33m ([m[1;31morigin/DTO-Inclusion[m[33m)[m
+Author: Rafael Garcia <rafaelbackup666@gmail.com>
+Date:   Sun Sep 29 16:44:57 2024 -0300
+
+    DTO and Mapper Inclusion
+
+[33mcommit c14951d880e74778f7f3c530d0dfd20b236f1a75[m
+Merge: 0c60c13 1eb8ce3
+Author: Bonfim-Gusta <159739673+Bonfim-Gusta@users.noreply.github.com>
+Date:   Sun Sep 29 16:31:04 2024 -0300
+
+    Merge pull request #18 from DevMatheusMarques/Create-Tickets-DTOs
+    
+    fix: create tickets dto's
+
+[33mcommit 0c60c132e028d2c77477d6c05835b3cece3a39e1[m
+Merge: 5be4afb ab315a7
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Sun Sep 29 01:23:07 2024 -0300
+
+    Merge pull request #15 from DevMatheusMarques/Create-Manage-parking-control
+    
+    feat: Create parking class
+
+[33mcommit ab315a7266d53d10ef4cb11519c012b27da7cfab[m[33m ([m[1;31morigin/Create-Manage-parking-control[m[33m)[m
+Merge: ff504c5 5be4afb
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Sun Sep 29 01:22:47 2024 -0300
+
+    Merge branch 'main' into Create-Manage-parking-control
+
+[33mcommit 5be4afbe7135162b58fe624000cad37b92083f6e[m
+Merge: 49e9642 d17a921
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Sun Sep 29 01:19:01 2024 -0300
+
+    Merge pull request #17 from DevMatheusMarques/create-VacancyDto-VacancyMapper
+    
+    Commiting implementations into Vacancy Classes to improve the logic and implement DTO and Mapper
+
+[33mcommit 49e9642ee4e104e085a37c95cee907727df3176e[m
+Author: Rafael Garcia <rafaelbackup666@gmail.com>
+Date:   Sun Sep 29 00:35:01 2024 -0300
+
+    Added DTO`s
+
+[33mcommit d17a921fe0b60b532b0c08073c302cb6f1b5718f[m[33m ([m[1;31morigin/create-VacancyDto-VacancyMapper[m[33m)[m
+Author: JorgeMassaru <jorge.hashiguchi2005@gmail.com>
+Date:   Sat Sep 28 19:07:42 2024 -0300
+
+    Commiting implementations into Vacancy Classes to improve the logic and implement DTO and Mapper
+
+[33mcommit b4688fc79c4edb33043c6446fc036c88a35c145f[m
+Merge: b02a1ec 22d475a
+Author: Lívia Portela Ferreira <115835353+liviaportela@users.noreply.github.com>
+Date:   Sat Sep 28 17:11:14 2024 -0300
+
+    Merge pull request #16 from DevMatheusMarques/create-crud-ticket
+    
+    refactor: Adjusted TicketService and VehicleService
+
+[33mcommit 1eb8ce332235d05d73fe13a8a16b228bc8a43a87[m[33m ([m[1;31morigin/Create-Tickets-DTOs[m[33m, [m[1;32mCreate-Tickets-DTOs[m[33m)[m
+Author: Gustavo Bonfim <dev.gusta.io@gmail.com>
+Date:   Sat Sep 28 16:43:15 2024 -0300
+
+    fix: create tickets dto's
+
+[33mcommit 22d475a394b61896921b066afd41bc99b306fedc[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Fri Sep 27 21:59:21 2024 -0300
+
+    refactor: TicketService method saveTicket
+
+[33mcommit ff504c590977a82130bd4065220bd452d415fd5a[m
+Author: LucasGeneroso15 <lucas.siilva12@live.com>
+Date:   Fri Sep 27 21:53:49 2024 -0300
+
+    feat: Create parking class
+
+[33mcommit 527bccf5c4e27d680b1c607ef5f7c59ddc38b99d[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Fri Sep 27 21:52:51 2024 -0300
+
+    feature: VehicleService methods saveVehicleTicket and findTicketVehicleByPlate
+
+[33mcommit b02a1ec9eb49d5907210eb43a0bb9b77fcbdb199[m
+Merge: 706da91 61f11e7
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Fri Sep 27 17:10:51 2024 -0300
+
+    Merge pull request #14 from DevMatheusMarques/Relationship-adjustment-between-vehicle-and-ticket
+    
+    refactor: Relationship Adjustment Between Vehicle and Ticket
+
+[33mcommit 61f11e7d409ed70cf1a5b94e32fdf8e55f2f8fb3[m[33m ([m[1;31morigin/Relationship-adjustment-between-vehicle-and-ticket[m[33m)[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Fri Sep 27 17:06:07 2024 -0300
+
+    refactor: Relationship Adjustment Between Vehicle and Ticket
+
+[33mcommit 706da910152db708c6e407c692d2e3de85c57d8a[m
+Merge: 3017181 80f76b9
+Author: Bonfim-Gusta <159739673+Bonfim-Gusta@users.noreply.github.com>
+Date:   Fri Sep 27 15:59:17 2024 -0300
+
+    Merge pull request #13 from DevMatheusMarques/Create-Ticket-Documentation
+    
+    Create ticket documentation
+
+[33mcommit 80f76b9c8330c9447d625d57c132a060c5727368[m[33m ([m[1;31morigin/Create-Ticket-Documentation[m[33m, [m[1;32mCreate-Ticket-Documentation[m[33m)[m
+Merge: 93b3015 3017181
+Author: Gustavo Bonfim <dev.gusta.io@gmail.com>
+Date:   Fri Sep 27 15:11:56 2024 -0300
+
+    Merge branch 'main' of https://github.com/DevMatheusMarques/SPRINGBOOT_AUG_SQUAD-04-Challenge-2 into Create-Ticket-Documentation
+
+[33mcommit 93b30152cd761167d606f62bcaf127d57dbc26a5[m
+Author: Gustavo Bonfim <dev.gusta.io@gmail.com>
+Date:   Fri Sep 27 15:07:49 2024 -0300
+
+    docs: Create ticket documentation
+
+[33mcommit 30171815f191830175fc43c71e0d13ddd22d2cca[m
+Merge: e3ffdd0 0ee6157
+Author: JorgeMassaruHS <jorge.hashiguchi2005@gmail.com>
+Date:   Fri Sep 27 14:56:07 2024 -0300
+
+    Merge pull request #12 from DevMatheusMarques/create-classs-controller-service-entity-vacancy
+    
+    Changing Double to Integer
+
+[33mcommit e3ffdd09023f06c3f1ae23387b1bb5a5c627f5d5[m
+Merge: e11301f f0b7da4
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Fri Sep 27 14:55:05 2024 -0300
+
+    Merge pull request #11 from DevMatheusMarques/adjust-cancel-class-to-return-exceptions
+    
+    refactor: Adjusted the cancel class to return exceptions
+
+[33mcommit f0b7da4243c0cd11c63474b73b00bbd46c93fa34[m[33m ([m[1;31morigin/adjust-cancel-class-to-return-exceptions[m[33m)[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Fri Sep 27 14:54:10 2024 -0300
+
+    refactor: Adjusted exit cancel check
+
+[33mcommit 0ee61577534bf466e719e8e68922abce341948cf[m[33m ([m[1;31morigin/create-classs-controller-service-entity-vacancy[m[33m)[m
+Author: JorgeMassaru <jorge.hashiguchi2005@gmail.com>
+Date:   Fri Sep 27 14:40:39 2024 -0300
+
+    Changing Double to Integer
+
+[33mcommit ed93f586a5c1f4795683132533d2b04648667b25[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Fri Sep 27 14:39:20 2024 -0300
+
+    refactor: Adjusted the cancel class to return exceptions
+
+[33mcommit 354b8cd1663420306a5c4553538ae0f127d0ba31[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Thu Sep 26 22:37:21 2024 -0300
+
+    refactor: Adjusted TicketController
+
+[33mcommit 48ff13ebfb431c2fc21882f5c556c208dc2c4c19[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Thu Sep 26 22:34:25 2024 -0300
+
+    refactor: Adjusted methods in TicketService
+
+[33mcommit 8135aa030e78f15d0e7a887f24cb0ccbc7d5f1a6[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Thu Sep 26 22:30:12 2024 -0300
+
+    refactor: Adjusted TicketRepository
+
+[33mcommit 55f9051ce0d093ee66a1be746ffa8973257d8f47[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Thu Sep 26 22:24:30 2024 -0300
+
+    refactor: Ticket class add 'parked' attribute and change Vehicle relationship to ManyToOne
+
+[33mcommit ad06c74156f8d87141378215eade792600718c16[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Thu Sep 26 18:11:08 2024 -0300
+
+    fix: Total price calculation
+
+[33mcommit d00d69c27825d38db4de3a71220f0aa7da0f797e[m
+Author: Gustavo Bonfim <dev.gusta.io@gmail.com>
+Date:   Thu Sep 26 11:17:03 2024 -0300
+
+    refactor: Changing search mode with the findTicketById method
+
+[33mcommit 97ebe6fe2974b5480107ca9068f693eb45697dfb[m
+Author: Gustavo Bonfim <dev.gusta.io@gmail.com>
+Date:   Wed Sep 25 18:30:03 2024 -0300
+
+    chore: Changing @Autowired to 'private final' and renaming the 'getType' method to 'getTypeVehicle' of the Payment class
+
+[33mcommit b4da166ccb7da418bd55f39c5fdeebd9db031956[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Wed Sep 25 18:01:24 2024 -0300
+
+    feat: Ticket controller completed
+
+[33mcommit 8ef7b6c5045251c255e4ecb18843ef0d5275d04e[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Wed Sep 25 18:00:17 2024 -0300
+
+    feat: Ticket service completed
+
+[33mcommit b0ad36efed5b672116507e935d58cea963ff46b4[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Wed Sep 25 17:58:43 2024 -0300
+
+    feat: Ticket repository completed
+
+[33mcommit 21cdf0de9a3990f123578a877bb3b3594e673747[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Wed Sep 25 17:57:07 2024 -0300
+
+    feat: Ticket entity completed
+
+[33mcommit 58a7cf844f67695ac61f6787165a64a68247d7bd[m
+Author: Lívia <liviaportelaferreira@gmail.com>
+Date:   Wed Sep 25 17:52:55 2024 -0300
+
+    feat: Payment class created
+
+[33mcommit e11301f5719b38fc40f1500b4b40b7c16f7b508c[m
+Merge: fc4258d 00a084d
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Thu Sep 26 17:26:42 2024 -0300
+
+    Merge pull request #10 from DevMatheusMarques/create-cancel-class
+    
+    feat: Cancel management class completed
+
+[33mcommit 00a084d8233396b28373fb30cc3e481bb99a4306[m[33m ([m[1;31morigin/create-cancel-class[m[33m)[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Thu Sep 26 16:44:06 2024 -0300
+
+    feat: Cancel management class completed
+
+[33mcommit fc4258dd59eb737fa2ca55ab4d3866d943c127c0[m
+Merge: 5c0ecc6 1ee7d1c
+Author: JorgeMassaruHS <jorge.hashiguchi2005@gmail.com>
+Date:   Thu Sep 26 16:13:34 2024 -0300
+
+    Merge pull request #9 from DevMatheusMarques/create-classs-controller-service-entity-vacancy
+    
+    Sending Controller, Entity and Service to branch
+
+[33mcommit 1ee7d1ca7381ce7064c58b34bf96194011ec28c8[m
+Author: JorgeMassaru <jorge.hashiguchi2005@gmail.com>
+Date:   Thu Sep 26 15:49:42 2024 -0300
+
+    Changing getById to getAll in Controller and Service
+
+[33mcommit 8de8af1544d7b3345de0e38b4602a881ac57a908[m
+Author: JorgeMassaru <jorge.hashiguchi2005@gmail.com>
+Date:   Thu Sep 26 15:43:08 2024 -0300
+
+    Sending changes in 'VacancyController'
+
+[33mcommit 6f031622f01c1b8fe43440555f6de49b29f04015[m
+Author: JorgeMassaru <jorge.hashiguchi2005@gmail.com>
+Date:   Thu Sep 26 15:15:56 2024 -0300
+
+    Sending commit about some changes in 'Vacancy', 'VacancyService', 'VacancyController', 'VacancyRepository'
+
+[33mcommit 5c0ecc6407883e21f06518a05de3fb582bc6e66c[m
+Merge: e516a86 a5f3839
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Wed Sep 25 18:30:45 2024 -0300
+
+    Merge pull request #8 from DevMatheusMarques/refactor-vehicle-entity
+    
+    refactor: Adjusted vehicle entity annotations
+
+[33mcommit a5f38394bb1b383e99d283d28b5f113af797d559[m[33m ([m[1;31morigin/refactor-vehicle-entity[m[33m)[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 18:30:14 2024 -0300
+
+    refactor: Adjusted vehicle entity annotations
+
+[33mcommit 216c993c9b6606bf563440fc6d0520fdf74407d0[m
+Author: JorgeMassaru <jorge.hashiguchi2005@gmail.com>
+Date:   Wed Sep 25 17:45:58 2024 -0300
+
+    Sending Controller, Entity and Service to branch
+
+[33mcommit e516a8627846ad8b914444879afa0acf58aec538[m
+Merge: 7e77dac 62bea94
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Wed Sep 25 17:07:02 2024 -0300
+
+    Merge pull request #7 from DevMatheusMarques/refactor-vehicle-entity
+    
+    refactor: Adjusted vehicle entity variables
+
+[33mcommit 62bea9480d99f4a809148422169242c17769a9a0[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 16:35:10 2024 -0300
+
+    refactor: Adjusted vehicle entity variables
+
+[33mcommit 7e77dac1d0d06d930e3fb3d9c53881c867360af8[m
+Merge: ac5126f cbeb3b0
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Wed Sep 25 16:00:09 2024 -0300
+
+    Merge pull request #6 from DevMatheusMarques/create-enum-category
+    
+    feat: Finished category enum class
+
+[33mcommit cbeb3b034f437db56af43c602ac8e8247c5e1e08[m[33m ([m[1;31morigin/create-enum-category[m[33m)[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 15:54:55 2024 -0300
+
+    feat: Finished category enum class
+
+[33mcommit ac5126f5369145b5678c992333cfaeeb649c76e5[m
+Merge: 66c472e e2f949a
+Author: Lucas Generoso <114314199+LucasGeneroso15@users.noreply.github.com>
+Date:   Wed Sep 25 15:42:37 2024 -0300
+
+    Merge pull request #5 from DevMatheusMarques/create-enum-type-vehicle
+    
+    feat: Vehicle type enum completed
+
+[33mcommit e2f949a020a1f36e0f168d11645c24b62abc585e[m[33m ([m[1;31morigin/create-enum-type-vehicle[m[33m)[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 15:41:22 2024 -0300
+
+    refactor: Adjusted vehicle type names in vehicle enum class
+
+[33mcommit 694396a71b7194ab598e56e44b65d4cb997c95fb[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 14:29:14 2024 -0300
+
+    feat: Vehicle type enum completed
+
+[33mcommit 66c472ee6d2ddae1ca1c5c2d7aa95cb530f74dc4[m
+Merge: 019beec e7a28ce
+Author: Matheus Marques <134082720+DevMatheusMarques@users.noreply.github.com>
+Date:   Wed Sep 25 13:58:10 2024 -0300
+
+    Merge pull request #3 from DevMatheusMarques/create-crud-vehicle
+    
+    Completed crud vehicle
+
+[33mcommit 019beec6cb54fef4c1d672144ee24e6e031d0ee4[m
+Merge: 7eec3fe 9ee4207
+Author: Lucas Generoso <114314199+LucasGeneroso15@users.noreply.github.com>
+Date:   Wed Sep 25 13:28:23 2024 -0300
+
+    Merge pull request #4 from DevMatheusMarques/Create-Exceptions-Handler-Class
+    
+    feat: Create-Exceptions-Handler-Class
+
+[33mcommit e7a28ce10554f9536a44b066da6ac8c5bca7b8b3[m[33m ([m[1;31morigin/create-crud-vehicle[m[33m)[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 13:27:57 2024 -0300
+
+    refactor: Adjusted @Transactional of vehicle service and type of variable in vehicle entity
+
+[33mcommit 9ee4207f38bc100ae1354f42f1b6b84a39ace2eb[m[33m ([m[1;31morigin/Create-Exceptions-Handler-Class[m[33m, [m[1;32mTests-PullResquests[m[33m)[m
+Author: LucasGeneroso15 <lucas.siilva12@live.com>
+Date:   Wed Sep 25 12:25:42 2024 -0300
+
+    feat: Create-Exceptions-Handler-Class
+
+[33mcommit 043b0b1dd8ded9f455aed46efbdda167d601bbec[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 12:34:49 2024 -0300
+
+    chore: Deleted unused test classes
+
+[33mcommit 7eec3fe72c98716b081728a448ee7e9d61413cd2[m
+Merge: 1439777 414c89f
+Author: Lucas Generoso <114314199+LucasGeneroso15@users.noreply.github.com>
+Date:   Wed Sep 25 12:35:32 2024 -0300
+
+    Merge pull request #2 from DevMatheusMarques/Create-Class-ErrorMessage
+    
+    Create class error message
+
+[33mcommit 1439777e2384eb44d74b3c0efe0329a2e32336f8[m
+Merge: 8000fa1 e77cb0a
+Author: Lucas Generoso <114314199+LucasGeneroso15@users.noreply.github.com>
+Date:   Wed Sep 25 12:34:29 2024 -0300
+
+    Merge pull request #1 from DevMatheusMarques/Create-Configuration-Class
+    
+    Create configuration Timezone and completed tests
+
+[33mcommit c6ffb539d690259a948a6f7c8f61bdb137f64584[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 12:34:21 2024 -0300
+
+    feat: Vehicle controller completed
+
+[33mcommit 13cb4b5bf1799d2ba9ee2cfb8d244c9dedabd6ad[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 12:34:04 2024 -0300
+
+    feat: Created class for specific exception to search for all vehicles
+
+[33mcommit d9f2c1787cb1f6b0f7fa4df1bd1e26f9c115eff4[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 12:32:31 2024 -0300
+
+    feat: Vehicle service completed
+
+[33mcommit 9a99fc287ab3371d87fa6968e89df8c0b7d11d09[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 12:32:20 2024 -0300
+
+    feat: Vehicle repository completed
+
+[33mcommit 1ea5ba13810999403377fac1b93d1787179369be[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 12:31:52 2024 -0300
+
+    feat: Vehicle entity completed
+
+[33mcommit cfb38d8f117a417e8c29280bd852676ca78d4d5f[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Wed Sep 25 12:25:16 2024 -0300
+
+    chore: Deleted unused test classes
+
+[33mcommit 414c89f5db174fee1851575d9e5c8be843763fd9[m[33m ([m[1;31morigin/Create-Class-ErrorMessage[m[33m, [m[1;32mCreate-Class-ErrorMessage[m[33m)[m
+Author: Gustavo Bonfim <dev.gusta.io@gmail.com>
+Date:   Wed Sep 25 00:30:34 2024 -0300
+
+    Creating ErrorMessage class
+
+[33mcommit e77cb0a6a11ed6af22f4230e40919536c1fdd736[m[33m ([m[1;31morigin/Create-Configuration-Class[m[33m, [m[1;32mCreate-Configuration-Class[m[33m)[m
+Author: Gustavo Bonfim <dev.gusta.io@gmail.com>
+Date:   Wed Sep 25 00:24:50 2024 -0300
+
+    Create configuration Timezone and completed tests
+
+[33mcommit 8000fa15b5d2be9227ef4db583567c1e6d9a9b24[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Tue Sep 24 17:05:17 2024 -0300
+
+    feat: Created directories
+
+[33mcommit 9d3d66d6c21806aaded83519c402f20d69864fa1[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Tue Sep 24 17:00:11 2024 -0300
+
+    docs: Adjusted Readme file for documentation
+
+[33mcommit 2a0b784625a252beb0a8a809cbcdfef64bc0211d[m
+Author: DevMatheusMarques <estudosfatecmhcm@gmail.com>
+Date:   Mon Sep 23 17:16:14 2024 -0300
+
+    feat: Project created and established database connection configuration
