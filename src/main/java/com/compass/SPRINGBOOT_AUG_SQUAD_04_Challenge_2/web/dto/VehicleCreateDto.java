@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 public class VehicleCreateDto {
     private String plate;
-    private String type;
+    private String typeVehicle;
     private String category;
 }

@@ -34,8 +34,11 @@ public class Ticket implements Serializable {
     private Integer exitCancel;
     @Column(name = "final_price")
     private Double finalPrice;
+    @Column(name = "primary_vacancies_occupied")
+    private Integer initialVacancyOccupied;
     @Column(name = "vacancies_occupied")
-    private Integer vacanciesOccupied;
+    @ElementCollection
+    private List<Integer> vacanciesOccupied;
 
     @ManyToOne
     @JoinColumn(name = "vehicle_plate", referencedColumnName = "plate", nullable = false)

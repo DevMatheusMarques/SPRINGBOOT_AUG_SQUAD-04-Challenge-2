@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/tickets")
 @RequiredArgsConstructor
-@Tag(name = "Tickets", description = "Contains all operations related to resources for registering, editing and reading a user.")
+@Tag(name = "Tickets", description = "Contains all operations related to resources for registering, editing and reading a ticket.")
 public class TicketController {
 
     private final TicketService ticketService;
@@ -59,9 +59,9 @@ public class TicketController {
         return ResponseEntity.ok(TicketMapper.toListDto(tickets));
     }
 
-    @Operation(summary = "Update ticket", description = "Update ticket with more informations, like final price and time exit.",
+    @Operation(summary = "Update ticket", description = "Update ticket with more information's, like final price and time exit.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Ticket updated suscessfully.",
+                    @ApiResponse(responseCode = "200", description = "Ticket updated successfully.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = TicketResponseDto.class))),
                     @ApiResponse(responseCode = "404", description = "Ticket not found to update.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
@@ -74,7 +74,7 @@ public class TicketController {
 
     @Operation(summary = "Delete ticket", description = "Delete the ticket with the id received.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Ticket deleted suscessfully.",
+                    @ApiResponse(responseCode = "200", description = "Ticket deleted successfully.",
                             content = @Content(mediaType = "application/json")),
                     @ApiResponse(responseCode = "404", description = "Ticket not found to delete.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),

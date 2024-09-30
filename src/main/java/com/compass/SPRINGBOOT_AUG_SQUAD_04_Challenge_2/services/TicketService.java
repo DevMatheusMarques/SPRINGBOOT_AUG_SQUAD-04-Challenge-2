@@ -6,13 +6,16 @@ import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vehicle;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.Category;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.TypeVehicle;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoVacanciesAvailableException;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.VehicleNotRegisteredException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.TicketRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,21 +36,30 @@ public class TicketService {
 
         if (vehicle == null) {
             vehicle = new Vehicle();
-            vehicle.setCategory(Category.SINGLE);
+            if (typeVehicle == TypeVehicle.PUBLIC_SERVICE) {
+                vehicle.setCategory(Category.PUBLIC_SERVICE);
+            } else if (typeVehicle == TypeVehicle.DELIVERY_TRUCK) {
+                throw new VehicleNotRegisteredException("This type of vehicle must be previously registered in the system.");
+            } else {
+                vehicle.setCategory(Category.SINGLE);
+            }
             vehicle.setTypeVehicle(typeVehicle);
             vehicle.setPlate(ticket.getVehicle().getPlate());
             vehicle.setRegistered(Boolean.FALSE);
+            vehicle.setDateCreated(LocalDateTime.now());
             vehicleService.saveVehicleTicket(vehicle);
         }
         if (activeTicket != null) {
-            throw new IllegalStateException("This vehicle is already in the parking lot.");
+            throw new DataIntegrityViolationException("This vehicle is already in the parking lot.");
         }
 
         boolean allowedEntry = CancelService.allowEntry(vehicle.getTypeVehicle(), ticket.getEntryCancel());
 
         if (allowedEntry) {
-            Integer entry = parkingService.vehicleEntry(vehicle.getCategory(), vehicle.getTypeVehicle());
-            ticket.setVacanciesOccupied(entry);
+            List<Integer> occupiedSpaces = parkingService.vehicleEntry(vehicle.getCategory(), vehicle.getTypeVehicle());
+            ticket.setVacanciesOccupied(occupiedSpaces);
+            Integer entry = occupiedSpaces.getFirst();
+            ticket.setInitialVacancyOccupied(entry);
         }
 
         ticket.setVehicle(vehicle);
@@ -96,24 +108,28 @@ public class TicketService {
     public Ticket updateTicket(Long id, Ticket ticket) {
         Ticket ticketToUpdate = findTicketById(id);
         Ticket activeTicket = findActiveTicketByVehiclePlate(ticketToUpdate.getVehicle().getPlate());
+        TypeVehicle typeVehicle = activeTicket.getVehicle().getTypeVehicle();
+        Category category = activeTicket.getVehicle().getCategory();
 
-        if (activeTicket == null || !activeTicket.getId().equals(ticketToUpdate.getId())) {
+        if (!activeTicket.getId().equals(ticketToUpdate.getId())) {
             throw new IllegalStateException("You cannot update an inactive ticket.");
         }
 
-        ticketToUpdate.setDateTimeExit(ticket.getDateTimeExit());
+        ticketToUpdate.setDateTimeExit(LocalDateTime.now());
         ticketToUpdate.setExitCancel(ticket.getExitCancel());
 
         boolean allowedExit = CancelService.allowExit(ticketToUpdate.getVehicle().getTypeVehicle(), ticketToUpdate.getExitCancel());
-
         if (allowedExit) {
-            parkingService.vehicleExit(ticketToUpdate.getVacanciesOccupied(), ticketToUpdate.getVehicle());
+            parkingService.vehicleExit(ticketToUpdate.getInitialVacancyOccupied(), ticketToUpdate.getVehicle());
         }
 
-        Payment payment = new Payment(ticketToUpdate);
-        Double finalPrice = payment.calculateValue();
-
-        ticketToUpdate.setFinalPrice(finalPrice);
+        if (typeVehicle == TypeVehicle.DELIVERY_TRUCK || typeVehicle == TypeVehicle.PUBLIC_SERVICE || category == Category.MONTHLY_PAYER) {
+            ticketToUpdate.setFinalPrice(0.0);
+        } else {
+            Payment payment = new Payment(ticketToUpdate);
+            Double finalPrice = payment.calculateValue();
+            ticketToUpdate.setFinalPrice(finalPrice);
+        }
 
         ticketToUpdate.setParked(Boolean.FALSE);
 
