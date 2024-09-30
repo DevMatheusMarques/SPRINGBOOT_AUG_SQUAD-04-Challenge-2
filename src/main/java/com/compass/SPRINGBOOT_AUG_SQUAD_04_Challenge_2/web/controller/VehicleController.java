@@ -45,9 +45,9 @@ public class VehicleController {
         return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonList(VehicleMapper.toDto(vehicles)));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<VehicleResponseDto> update(@PathVariable Vehicle vehicle) {
-        Vehicle vehicleDto = vehicleService.updateVehicle(vehicle);
+    @PatchMapping("/{id}")
+    public ResponseEntity<VehicleResponseDto> update(@PathVariable Vehicle id) {
+        Vehicle vehicleDto = vehicleService.updateVehicle(id);
         return ResponseEntity.status(HttpStatus.OK).body(VehicleMapper.toDto(vehicleDto));
     }
 

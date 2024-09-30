@@ -88,7 +88,7 @@ public class ParkingService {
         return -1; // Returns -1 if there is no block of free spaces of the required size
     }
 
-    public Integer vehicleEntry(Category category, TypeVehicle type) throws NoVacanciesAvailableException {
+    public List<Integer> vehicleEntry(Category category, TypeVehicle type) throws NoVacanciesAvailableException {
         int size =  type.equals(TypeVehicle.MOTOCYCLE) ? 1 :
                     type.equals(TypeVehicle.PASSENGER_CAR) ? 2 :
                     type.equals(TypeVehicle.DELIVERY_TRUCK) ? 4 : 0;
@@ -116,7 +116,7 @@ public class ParkingService {
             vacancyService.updateVacancyOccupied(1L, occupiedSeparated, null );
         }
 
-        return initialSpace;
+        return recoverVacancies(initialSpace, type);
     }
 
     public void vehicleExit(int initialSpace, Vehicle vehicle) {

@@ -10,7 +10,7 @@ import lombok.Setter;
 public class VehicleResponseDto {
     private long id;
     private String plate;
-    private String type;
+    private String typeVehicle;
     private String category;
     private boolean registered;
 }

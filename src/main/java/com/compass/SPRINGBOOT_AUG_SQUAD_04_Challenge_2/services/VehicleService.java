@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -66,6 +67,7 @@ public class VehicleService {
     @Transactional
     public Vehicle updateVehicle(Vehicle vehicle) {
         try {
+            vehicle.setDateModified(LocalDateTime.now());
             return vehicleRepository.save(vehicle);
         } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityViolationException("Unable to change vehicle data");

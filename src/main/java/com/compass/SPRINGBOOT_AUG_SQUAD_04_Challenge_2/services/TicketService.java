@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class TicketService {
             vehicle.setTypeVehicle(typeVehicle);
             vehicle.setPlate(ticket.getVehicle().getPlate());
             vehicle.setRegistered(Boolean.FALSE);
+            vehicle.setDateCreated(LocalDateTime.now());
             vehicleService.saveVehicleTicket(vehicle);
         }
         if (activeTicket != null) {
@@ -46,8 +48,10 @@ public class TicketService {
         boolean allowedEntry = CancelService.allowEntry(vehicle.getTypeVehicle(), ticket.getEntryCancel());
 
         if (allowedEntry) {
-            Integer entry = parkingService.vehicleEntry(vehicle.getCategory(), vehicle.getTypeVehicle());
-            ticket.setVacanciesOccupied(entry);
+            List<Integer> occupiedSpaces = parkingService.vehicleEntry(vehicle.getCategory(), vehicle.getTypeVehicle());
+            ticket.setVacanciesOccupied(occupiedSpaces);
+            Integer entry = occupiedSpaces.getFirst();
+            ticket.setInitialVacancyOccupied(entry);
         }
 
         ticket.setVehicle(vehicle);
@@ -101,13 +105,13 @@ public class TicketService {
             throw new IllegalStateException("You cannot update an inactive ticket.");
         }
 
-        ticketToUpdate.setDateTimeExit(ticket.getDateTimeExit());
+        ticketToUpdate.setDateTimeExit(LocalDateTime.now());
         ticketToUpdate.setExitCancel(ticket.getExitCancel());
 
         boolean allowedExit = CancelService.allowExit(ticketToUpdate.getVehicle().getTypeVehicle(), ticketToUpdate.getExitCancel());
 
         if (allowedExit) {
-            parkingService.vehicleExit(ticketToUpdate.getVacanciesOccupied(), ticketToUpdate.getVehicle());
+            parkingService.vehicleExit(ticketToUpdate.getInitialVacancyOccupied(), ticketToUpdate.getVehicle());
         }
 
         Payment payment = new Payment(ticketToUpdate);

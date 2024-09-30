@@ -12,7 +12,7 @@ public class VehicleMapper {
     //Gets DTO and returns a new Vehicle object with DTO attributes
     public static Vehicle toVehicle(VehicleCreateDto createDto) {
         return new Vehicle(createDto.getPlate(),
-                   Enum.valueOf(TypeVehicle.class ,createDto.getType()),
+                   Enum.valueOf(TypeVehicle.class ,createDto.getTypeVehicle()),
                    Enum.valueOf(Category.class ,createDto.getCategory()));
     }
 
