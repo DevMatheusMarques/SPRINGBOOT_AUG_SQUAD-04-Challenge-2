@@ -105,7 +105,7 @@ public class ParkingServiceTests {
 
         assertEquals("No available spaces for PASSENGER_CAR monthly", exception.getMessage());
     }
-    
+
 
     @Test
     public void vehicleExit_ReturnFreesTheVacancies() {
