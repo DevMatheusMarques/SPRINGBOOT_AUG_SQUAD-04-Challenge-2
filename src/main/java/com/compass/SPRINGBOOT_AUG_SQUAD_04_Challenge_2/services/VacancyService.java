@@ -7,7 +7,9 @@ import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.IllegalUpdateV
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoResultsFoundException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.VacancyRepository;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyResponseDto;
+
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.mapper.VacancyMapper;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,19 @@ public class VacancyService {
 
     @Autowired
     private VacancyRepository vacancyRepository;
+
+    @PostConstruct
+    public void init() {
+        if (vacancyRepository.count() == 0) {
+            Vacancy vacancy = new Vacancy();
+            vacancy.setSeparated_capacity(300);
+            vacancy.setMonthly_capacity(200);
+            vacancy.setMonthly_occupied(0);
+            vacancy.setSeparated_ocuppied(0);
+
+            vacancyRepository.save(vacancy);
+        }
+    }
 
     /**
      * Retrieves a list of all vacancies in the system and converts them into
