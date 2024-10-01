@@ -2,6 +2,7 @@ package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities;
 
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.enums.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,6 +18,7 @@ import java.util.List;
  * It includes information such as ID, plate number, category, and vehicle type,
  * as well as metadata for creation and modification timestamps.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter // Automatically generates getter methods for the attributes.
 @Setter // Automatically generates setter methods for the attributes.
 @NoArgsConstructor // Automatically generates a no-argument constructor.

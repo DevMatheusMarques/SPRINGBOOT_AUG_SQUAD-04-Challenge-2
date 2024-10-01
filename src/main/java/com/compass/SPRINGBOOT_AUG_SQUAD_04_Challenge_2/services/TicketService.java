@@ -10,14 +10,11 @@ import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoVacanciesAva
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.VehicleInParkingException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.VehicleNotRegisteredException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.TicketRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
