@@ -1,6 +1,5 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services;
 
-//import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.ParkingService;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Payment;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Ticket;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vehicle;
@@ -30,7 +29,7 @@ public class TicketService {
 
     private final TicketRepository ticketRepository;  // Repository for ticket data access
     private final VehicleService vehicleService;      // Service for vehicle operations
-//    private final ParkingService parkingService;      // Service for parking operations
+    private final ParkingService parkingService;      // Service for parking operations
 
     /**
      * Saves a new ticket into the system. If the vehicle is not registered,

@@ -144,7 +144,7 @@ public class VehicleService {
             vehicleToUpdate.setCategory(vehicle.getCategory());
             vehicleToUpdate.setTypeVehicle(vehicle.getTypeVehicle());
             vehicleToUpdate.setDateModified(LocalDateTime.now());
-            return vehicleRepository.getById(vehicleToUpdate.getId());
+            return vehicleRepository.save(vehicleToUpdate);
         } catch (DataIntegrityViolationException e) {
             throw new IllegalUpdateVehicleException("Unable to change vehicle data");
         }

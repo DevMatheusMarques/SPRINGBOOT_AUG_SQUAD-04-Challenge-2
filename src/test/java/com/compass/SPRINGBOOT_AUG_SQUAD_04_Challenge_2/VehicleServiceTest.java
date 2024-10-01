@@ -14,9 +14,9 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import java.util.List;
 
 @SpringBootTest (webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Sql(scripts = "/sql/tickets/insert-vehicle.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(scripts = "/sql/tickets/delete-vehicle.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class VehicleTests {
+@Sql(scripts = "/sql/tickets/vehicle/insert-vehicle.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "/sql/tickets/vehicle/delete-vehicle.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+public class VehicleServiceTest {
 
     @Autowired
     WebTestClient testClient;
@@ -80,7 +80,7 @@ public class VehicleTests {
     }
 
     @Test
-    @Sql(scripts = "/sql/tickets/delete-vehicle.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+    @Sql(scripts = "/sql/tickets/vehicle/delete-vehicle.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     public void getAll_ReturnStatus404(){
         ErrorMessage responseBody = testClient.get().uri("/api/v1/vehicles").exchange().expectStatus().
                 isEqualTo(404).expectBody(ErrorMessage.class).returnResult().getResponseBody();

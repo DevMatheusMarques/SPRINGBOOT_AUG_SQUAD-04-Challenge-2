@@ -82,7 +82,7 @@ public class VehicleController {
     @PatchMapping("/{id}")
     public ResponseEntity<VehicleResponseDto> update(@PathVariable Long id, @RequestBody VehicleCreateDto vehicles) {
         Vehicle vehicle = VehicleMapper.toVehicle(vehicles);
-        Vehicle vehicleDto = vehicleService.updateVehicle(id, vehicle);
+        vehicleService.updateVehicle(id, vehicle);
         return ResponseEntity.noContent().build();
     }
 

@@ -17,8 +17,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 //@Sql(scripts = {"src/test/java/com/compass/SPRINGBOOT_AUG_SQUAD_04_Challenge_2/sql/ticket/insert-vehicle.sql", "src/test/java/com/compass/SPRINGBOOT_AUG_SQUAD_04_Challenge_2/sql/ticket/insert-ticket.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 //@Sql(scripts = {"src/test/java/com/compass/SPRINGBOOT_AUG_SQUAD_04_Challenge_2/sql/ticket/delete-ticket.sql", "sql/ticket/delete-vehicle.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 
-@Sql(scripts = {"/sql/tickets/insert-vehicle.sql", "/sql/tickets/insert-ticket.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
-@Sql(scripts = {"/sql/tickets/delete-ticket.sql", "/sql/tickets/delete-vehicle.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(scripts = {"/sql/tickets/vehicle/insert-vehicle.sql", "/sql/tickets/insert-ticket.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = {"/sql/tickets/delete-ticket.sql", "/sql/tickets/vehicle/delete-vehicle.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TicketsTestsIT {
 
     @Autowired
