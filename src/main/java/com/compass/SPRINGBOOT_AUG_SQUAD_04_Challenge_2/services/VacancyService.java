@@ -1,5 +1,6 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services;
 
+// Import necessary classes and packages
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.IllegalUpdateVacancyException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.mapper.VacancyMapper;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vacancy;
@@ -17,6 +18,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * The VacancyService class provides methods to manage and manipulate vacancy data
+ * within the system. It includes functionalities to retrieve, update, and manage
+ * vacancy capacities and occupied spaces.
+ */
 @RequiredArgsConstructor
 @Service
 public class VacancyService {
@@ -37,6 +43,12 @@ public class VacancyService {
         }
     }
 
+    /**
+     * Retrieves a list of all vacancies in the system and converts them into
+     * VacancyResponseDto objects.
+     *
+     * @return List of VacancyResponseDto containing details of each vacancy.
+     */
     public List<VacancyResponseDto> getAllVacancies() {
         List<Vacancy> vacancies = vacancyRepository.findAll();
         return vacancies.stream()
@@ -44,6 +56,18 @@ public class VacancyService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Updates the capacity of a specific vacancy identified by its ID.
+     * If the new capacity is less than the number of occupied spaces,
+     * an IllegalUpdateVacancyException is thrown.
+     *
+     * @param id                  The ID of the vacancy to update.
+     * @param newSeparatedCapacity The new separated capacity for the vacancy.
+     * @param newMonthlyCapacity   The new monthly capacity for the vacancy.
+     * @return The updated Vacancy object.
+     * @throws IllegalUpdateVacancyException if the requested capacity is less than the current occupied spaces.
+     * @throws NoResultsFoundException        if no vacancy is found with the provided ID.
+     */
     public Vacancy updateVacancyCapacity(Long id, Integer newSeparatedCapacity, Integer newMonthlyCapacity) {
         Optional<Vacancy> vacancyOptional = vacancyRepository.findById(id);
         if (vacancyOptional.isPresent()) {
@@ -55,7 +79,6 @@ public class VacancyService {
                 vacancy.setSeparated_capacity(newSeparatedCapacity);
             }
             if (newMonthlyCapacity != null) {
-
                 if(newMonthlyCapacity < vacancy.getMonthly_occupied()){
                     throw new IllegalUpdateVacancyException("The requested capacity is less than the current number of parked vehicles");
                 }
@@ -67,6 +90,14 @@ public class VacancyService {
         }
     }
 
+    /**
+     * Updates the number of occupied spaces for a specific vacancy identified by its ID.
+     *
+     * @param id                   The ID of the vacancy to update.
+     * @param newSeparatedOccupied  The new number of separated occupied spaces.
+     * @param newMonthlyOccupied    The new number of monthly occupied spaces.
+     * @throws NoResultsFoundException if no vacancy is found with the provided ID.
+     */
     public void updateVacancyOccupied(Long id, Integer newSeparatedOccupied, Integer newMonthlyOccupied) {
         Optional<Vacancy> vacancyOptional = vacancyRepository.findById(id);
         if (vacancyOptional.isPresent()) {
