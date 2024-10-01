@@ -1,7 +1,7 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.controller;
 
-import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vacancy;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.VacancyService;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vacancy;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyCreateDto;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyResponseDto;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.mapper.VacancyMapper;

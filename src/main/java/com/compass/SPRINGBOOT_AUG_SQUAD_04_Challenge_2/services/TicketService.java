@@ -1,5 +1,6 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services;
 
+//import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.ParkingService;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Payment;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Ticket;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vehicle;
@@ -10,14 +11,11 @@ import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoVacanciesAva
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.VehicleInParkingException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.VehicleNotRegisteredException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.TicketRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class TicketService {
 
     private final TicketRepository ticketRepository;  // Repository for ticket data access
     private final VehicleService vehicleService;      // Service for vehicle operations
-    private final ParkingService parkingService;      // Service for parking operations
+//    private final ParkingService parkingService;      // Service for parking operations
 
     /**
      * Saves a new ticket into the system. If the vehicle is not registered,

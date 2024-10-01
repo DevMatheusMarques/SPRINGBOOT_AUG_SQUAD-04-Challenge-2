@@ -1,12 +1,10 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities;
 
-import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.ParkingService;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

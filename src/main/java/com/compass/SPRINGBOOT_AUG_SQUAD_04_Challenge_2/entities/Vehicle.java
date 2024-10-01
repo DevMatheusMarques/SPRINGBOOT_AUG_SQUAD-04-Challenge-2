@@ -37,7 +37,7 @@ public class Vehicle implements Serializable {
      * Indicates if the vehicle is registered.
      */
     @Column(name = "registered", nullable = false)
-    private Boolean registered;
+    private Boolean registered = false;
 
     /**
      * The vehicle's license plate. It must be unique and have a maximum length of 9 characters.
