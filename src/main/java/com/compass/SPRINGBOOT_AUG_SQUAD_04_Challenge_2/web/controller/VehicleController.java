@@ -1,6 +1,7 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.controller;
 
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Vehicle;
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoResultsFoundException;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.VehicleService;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VehicleCreateDto;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VehicleResponseDto;
@@ -63,6 +64,8 @@ public class VehicleController {
     @GetMapping
     public ResponseEntity<List<VehicleResponseDto>> getAll() {
         List<Vehicle> vehicles = vehicleService.findAllVehicles();
+        if(vehicles.isEmpty()) {throw new NoResultsFoundException("No vehicles are registered yet");
+        }
         return ResponseEntity.ok(VehicleMapper.toListDto(vehicles));
     }
 
@@ -77,9 +80,10 @@ public class VehicleController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PatchMapping("/{id}")
-    public ResponseEntity<VehicleResponseDto> update(@PathVariable Long id, @RequestBody Vehicle vehicle) {
+    public ResponseEntity<VehicleResponseDto> update(@PathVariable Long id, @RequestBody VehicleCreateDto vehicles) {
+        Vehicle vehicle = VehicleMapper.toVehicle(vehicles);
         Vehicle vehicleDto = vehicleService.updateVehicle(id, vehicle);
-        return ResponseEntity.status(HttpStatus.OK).body(VehicleMapper.toDto(vehicleDto));
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "Delete vehicle by ID.", description = "Delete vehicle from database by ID.",
