@@ -8,6 +8,7 @@ import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.repositories.VacancyRepos
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyCreateDto;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.VacancyResponseDto;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class VacancyService {
 
     @Autowired
     private VacancyRepository vacancyRepository;
-
+    
     public List<VacancyResponseDto> getAllVacancies() {
         List<Vacancy> vacancies = vacancyRepository.findAll();
         return vacancies.stream()

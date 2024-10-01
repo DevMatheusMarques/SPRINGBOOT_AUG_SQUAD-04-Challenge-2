@@ -1,17 +1,17 @@
-INSERT INTO VEHICLES (id, category, plate, registered ,type_vehicle)
-VALUES (1, 1, 'ABC-0000', 1, 1);
+INSERT INTO VEHICLES (category, plate, registered ,type_vehicle)
+VALUES (1, 'AAA-0000', true, 1);
 
-INSERT INTO VEHICLES (id, category, plate, registered ,type_vehicle)
-VALUES (2, 'MONTHLY_PAYER', 'ABC-1111', 1, 'PASSENGER_CAR');
+INSERT INTO VEHICLES (category, plate, registered ,type_vehicle)
+VALUES (4, 'AAA-1111', true, 4);
 
-INSERT INTO VEHICLES (id, category, plate, registered ,type_vehicle)
-VALUES (3, 'SINGLE', 'ABC-2222', 1, 'MOTORCYCLE');
+INSERT INTO VEHICLES (category, plate, registered ,type_vehicle)
+VALUES (2, 'AAA-2222', true, 1);
 
-INSERT INTO VEHICLES (id, category, plate, registered ,type_vehicle)
-VALUES (4, 'MONTHLY_PAYER', 'ABC-3333', 1, 'MOTORCYCLE');
+INSERT INTO VEHICLES (category, plate, registered ,type_vehicle)
+VALUES (1, 'AAA-3333', true, 1);
 
-INSERT INTO VEHICLES (id, category, plate, registered ,type_vehicle)
-VALUES (5, 'DELIVERY_TRUCK', 'ABC-4444', 1, 'DELIVERY_TRUCK');
+INSERT INTO VEHICLES (category, plate, registered ,type_vehicle)
+VALUES (1, 'AAA-4444', true, 1);
 
-INSERT INTO VEHICLES (id, category, plate, registered ,type_vehicle)
-VALUES (6, 'PUBLIC_SERVICE', 'ABC-5555', 1, 'PUBLIC_SERVICE');
+INSERT INTO VEHICLES (category, plate, registered ,type_vehicle)
+VALUES (1, 'AAA-5555', true, 1);
