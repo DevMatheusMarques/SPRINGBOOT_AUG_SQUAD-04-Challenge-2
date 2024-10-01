@@ -1,5 +1,5 @@
 INSERT INTO VEHICLES (id, category, plate, registered ,type_vehicle)
-VALUES (1, 1, 'ABC-0000', 1, 1);
+VALUES (100, 1, 'ABC-0000', 1, 1);
 
 INSERT INTO VEHICLES (id, category, plate, registered ,type_vehicle)
 VALUES (2, 'MONTHLY_PAYER', 'ABC-1111', 1, 'PASSENGER_CAR');

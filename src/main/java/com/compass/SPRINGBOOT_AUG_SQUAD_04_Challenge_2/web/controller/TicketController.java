@@ -1,8 +1,8 @@
 package com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.controller;
 
+import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.TicketService;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.entities.Ticket;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.NoVacanciesAvailableException;
-import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.services.TicketService;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.TicketCreateDto;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.TicketPostResponseDto;
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.web.dto.TicketResponseDto;
@@ -27,7 +27,7 @@ import java.util.List;
 @Tag(name = "Tickets", description = "Contains all operations related to resources for registering, editing and reading a ticket.")
 public class TicketController {
 
-    private final TicketService ticketService;
+  private final TicketService ticketService;
 
     @Operation(summary = "Issue a new ticket", description = "Resource to issue a new ticket.",
             responses = {
