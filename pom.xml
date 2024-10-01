@@ -46,7 +46,6 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>2.3.232</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -96,6 +95,36 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.10</version>
+				<configuration>
+					<excludes>
+						<exclude>com/compass/SPRINGBOOT_AUG_SQUAD_04_Challenge_2/SpringbootAugSquad04Challenge2Application.class</exclude>
+						<exclude>com/compass/SPRINGBOOT_AUG_SQUAD_04_Challenge_2/entities/**</exclude>
+						<exclude>com/compass/SPRINGBOOT_AUG_SQUAD_04_Challenge_2/enums/**</exclude>
+						<exclude>com/compass/SPRINGBOOT_AUG_SQUAD_04_Challenge_2/web/exceptions/**</exclude>
+						<exclude>com/compass/SPRINGBOOT_AUG_SQUAD_04_Challenge_2/web/dto/mapper/**</exclude>
+						<exclude>com/compass/SPRINGBOOT_AUG_SQUAD_04_Challenge_2/config/**</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
