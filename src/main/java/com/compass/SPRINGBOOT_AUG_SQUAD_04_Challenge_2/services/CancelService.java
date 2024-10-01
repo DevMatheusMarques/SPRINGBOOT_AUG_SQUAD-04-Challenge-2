@@ -6,9 +6,23 @@ import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.InvalidExitCan
 import com.compass.SPRINGBOOT_AUG_SQUAD_04_Challenge_2.exceptions.UnauthorizedCancelAccessException;
 import org.springframework.stereotype.Service;
 
+/**
+ * This class provides services for managing vehicle entry and exit through cancels
+ * in a parking system. It determines whether a vehicle of a specific type
+ * is allowed to enter or exit through a designated cancel.
+ */
 @Service
 public class CancelService {
 
+    /**
+     * Determines if a vehicle is allowed to enter through the specified cancel.
+     *
+     * @param typeVehicle The type of the vehicle attempting to enter.
+     * @param cancel      The cancel number through which the vehicle is attempting to enter.
+     * @return true if the vehicle is allowed to enter, false otherwise.
+     * @throws InvalidEntryCancelException     if the cancel number is not valid for entry.
+     * @throws UnauthorizedCancelAccessException if the vehicle type is not authorized to enter through the specified cancel.
+     */
     public static boolean allowEntry(TypeVehicle typeVehicle, Integer cancel) {
         // If the cancel is greater than or equal to 6, it's not an entry cancel
         if (cancel >= 6) {
@@ -42,6 +56,15 @@ public class CancelService {
         }
     }
 
+    /**
+     * Determines if a vehicle is allowed to exit through the specified cancel.
+     *
+     * @param typeVehicle The type of the vehicle attempting to exit.
+     * @param cancel      The cancel number through which the vehicle is attempting to exit.
+     * @return true if the vehicle is allowed to exit, false otherwise.
+     * @throws InvalidExitCancelException      if the cancel number is not valid for exit.
+     * @throws UnauthorizedCancelAccessException if the vehicle type is not authorized to exit through the specified cancel.
+     */
     public static boolean allowExit(TypeVehicle typeVehicle, Integer cancel) {
         // If the cancel is less than or equal to 5, it's not an exit cancel
         if (cancel < 6 || cancel > 10) {
@@ -67,6 +90,11 @@ public class CancelService {
         }
     }
 
+    /**
+     * Simulates the action of opening a cancel.
+     *
+     * @return true indicating the cancel has been opened.
+     */
     public static boolean openCancel() {
         // Simulate opening the cancel
         return true;
