@@ -74,7 +74,7 @@ public class TicketController {
 
     @Operation(summary = "Delete ticket", description = "Delete the ticket with the id received.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Ticket deleted successfully.",
+                    @ApiResponse(responseCode = "204", description = "Ticket deleted successfully.",
                             content = @Content(mediaType = "application/json")),
                     @ApiResponse(responseCode = "404", description = "Ticket not found to delete.",
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
